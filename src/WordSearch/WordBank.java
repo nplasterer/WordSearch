@@ -1,3 +1,4 @@
+package WordSearch;
 import java.util.Map;
 
 import javax.swing.JCheckBox;

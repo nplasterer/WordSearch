@@ -1,3 +1,4 @@
+package WordSearch;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -8,7 +9,7 @@ import javax.swing.JFrame;
 public class Game extends JFrame{
 	private String playerName;
 	private GregorianCalendar time;
-	private String categories;
+	private String category;
 	private ArrayList<String> words;
 	private int wordsLeft;
 	private Point start;
@@ -22,9 +23,6 @@ public class Game extends JFrame{
 		
 	}
 	
-	public ArrayList<String> getCategories(){
-		return null;
-	}
 	
 	public boolean checkIfDone(){
 		return false;
@@ -40,6 +38,10 @@ public class Game extends JFrame{
 	
 	public boolean checkValidSelection(Point start, Point end){
 		return false;
+	}
+	
+	public String getCategory() {
+		return category;
 	}
 
 }
