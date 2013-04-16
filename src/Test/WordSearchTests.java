@@ -1,6 +1,9 @@
 package Test;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import junit.framework.Assert;
 
 import org.junit.BeforeClass;
@@ -22,12 +25,29 @@ public class WordSearchTests {
 
 	@Test
 	public void testLoadingWords() {
-		fail("Not yet implemented");
+		ArrayList<String> words = new ArrayList<String>();
+		words = game.getListofLinesFromFile("SecretFiles", "Cats.txt");
+		assertEquals(15, words.size());
+		assertTrue(words.contains("Calico"));
+		assertTrue(words.contains("Siamese"));
+		assertTrue(words.contains("Bengal"));
+		assertTrue(words.contains("Toyger"));
+		
+		words = game.getListofLinesFromFile("SecretFiles", "Automobiles.txt");
+		assertEquals(11, words.size());
+		assertTrue(words.contains("Dodge"));
+		assertTrue(words.contains("Mitsubishi"));
+		assertTrue(words.contains("Hummer"));
+		assertTrue(words.contains("Jeep"));
 	}
 	
 	@Test
 	public void testLoadFileNames() {
-		fail("Not yet implemented");
+		ArrayList<String> files = new ArrayList<String>();
+		files = game.getListofFiles("SecretFiles", ".txt", true);
+		assertEquals(2, files.size());
+		assertTrue(files.contains("Cats"));
+		assertTrue(files.contains("Automobiles"));
 	}
 
 	@Test
