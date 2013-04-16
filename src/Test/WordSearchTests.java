@@ -3,6 +3,9 @@ package Test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Map;
+
+import javax.swing.JCheckBox;
 
 import junit.framework.Assert;
 
@@ -11,6 +14,7 @@ import org.junit.Test;
 
 import WordSearch.Game;
 import WordSearch.SplashScreen;
+import WordSearch.WordBank;
 
 
 public class WordSearchTests {
@@ -62,12 +66,18 @@ public class WordSearchTests {
 		Assert.assertEquals("Automobiles", testGame.getCategory());
 	}
 	
-	//check valid selection directions and words
+	//check selection is valid
 	@Test
-	public void testMouseListener() {
+	public void testValidSelection() {
 		fail("Not yet implemented");
 	}
 	
+	//check word is correct
+	@Test
+	public void testValidWord() {
+		fail("Not yet implemented");
+	}
+		
 	@Test
 	public void testCellCharacters() {
 		fail("Not yet implemented");
@@ -75,12 +85,24 @@ public class WordSearchTests {
 	
 	@Test
 	public void testGameEnds() {
-		fail("Not yet implemented");
+		testGame.setWordsLeft(0);
+		Assert.assertTrue(testGame.checkIfDone());
 	}
 	
 	@Test
 	public void testWordBank() {
-		fail("Not yet implemented");
+		WordBank bank = testGame.getWordBank();
+		bank.checkBox("Calico");
+		bank.checkBox("Siamese");
+		bank.checkBox("Bengal");
+		Assert.assertEquals(testGame.getWords().size(), bank.getWordBank().size());
+		
+		
+		assertTrue(bank.getWordBank().get("Calico").isSelected());
+		assertTrue(bank.getWordBank().get("Siamese").isSelected());
+		assertTrue(bank.getWordBank().get("Bengal").isSelected());
+		assertFalse(bank.getWordBank().get("Ocelot").isSelected());
+		assertFalse(bank.getWordBank().get("Persian").isSelected());
 	}
 	
 	@Test

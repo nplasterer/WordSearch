@@ -16,4 +16,8 @@ public class WordBank extends JPanel{
 		
 	}
 
+	public Map<String, JCheckBox> getWordBank() {
+		return wordBank;
+	}
+
 }

@@ -14,6 +14,9 @@ public class Game extends JFrame{
 	private int wordsLeft;
 	private Point start;
 	private Point end;
+	private Cell[][] cells;
+	private WordBank wordBank;
+	private SplashScreen splashScreen;
 	
 	public Game() {
 		// TODO Auto-generated constructor stub
@@ -43,5 +46,16 @@ public class Game extends JFrame{
 	public String getCategory() {
 		return category;
 	}
-
+	
+	public void setWordsLeft(int left) {
+		wordsLeft = left;
+	}
+	
+	public ArrayList<String> getWords() {
+		return words;
+	}
+	
+	public WordBank getWordBank() {
+		return wordBank;
+	}
 }
