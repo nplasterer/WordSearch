@@ -14,7 +14,7 @@ public class Game extends JFrame{
 	private int wordsLeft;
 	private Point start;
 	private Point end;
-	private Cell[][] cells;
+	private Board board;
 	private WordBank wordBank;
 	private SplashScreen splashScreen;
 	
@@ -57,5 +57,17 @@ public class Game extends JFrame{
 	
 	public WordBank getWordBank() {
 		return wordBank;
+	}
+	
+	public ArrayList<String> getListofFiles(String dir, String ext, boolean includeExtension) {
+		return null;
+	}
+	
+	public ArrayList<String> getListofLinesFromFile(String dir, String file) {
+		return null;
+	}
+	
+	public Board getBoard() {
+		return board;
 	}
 }

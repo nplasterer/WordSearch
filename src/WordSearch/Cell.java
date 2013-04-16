@@ -19,5 +19,8 @@ public class Cell {
 	public void draw(Graphics g){
 		
 	}
-
+	
+	public char getLetter() {
+		return letter;
+	}
 }
