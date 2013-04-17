@@ -11,7 +11,7 @@ public class SplashScreen extends JDialog {
 	private JButton okButton;
 	
 	public SplashScreen() {
-		// TODO Auto-generated constructor stub
+		// TODO create constructor
 	}
 
 	public void setCategoriesText(String category) {

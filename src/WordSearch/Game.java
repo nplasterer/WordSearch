@@ -19,27 +19,30 @@ public class Game extends JFrame{
 	private SplashScreen splashScreen;
 	
 	public Game() {
-		// TODO Auto-generated constructor stub
+		// TODO create constructor
 	}
 	
 	public void loadConfigFile(String file){
-		
+		// TODO implement function
 	}
 	
 	
 	public boolean checkIfDone(){
+		// TODO implement function
 		return false;
 	}
 	
 	public void showWinScreen(){
-		
+		// TODO implement function
 	}
 	
 	public boolean checkValidWord(String word){
+		// TODO implement function
 		return false;
 	}
 	
 	public boolean checkValidSelection(Point start, Point end){
+		// TODO implement function
 		return false;
 	}
 	
@@ -60,10 +63,12 @@ public class Game extends JFrame{
 	}
 	
 	public ArrayList<String> getListofFiles(String dir, String ext, boolean includeExtension) {
+		// TODO implement function
 		return null;
 	}
 	
 	public ArrayList<String> getListofLinesFromFile(String dir, String file) {
+		// TODO implement function
 		return null;
 	}
 	

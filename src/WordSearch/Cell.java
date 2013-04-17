@@ -13,11 +13,11 @@ public class Cell {
 	private boolean highlighted;
 	
 	public Cell() {
-		// TODO Auto-generated constructor stub
+		// TODO create constructor. should there be an additional, parameterized constructor?
 	}
 	
 	public void draw(Graphics g){
-		
+		// TODO implement function
 	}
 	
 	public char getLetter() {

@@ -10,20 +10,20 @@ public class Board extends JPanel {
 	private Cell[][] cells;
 	
 	public Board() {
-		// TODO Auto-generated constructor stub
+		// TODO create constructor
 	}
 	
 	public void generatePuzzle(ArrayList<String> words){
-		
+		// TODO implement function
 	}
 	
 	public void insertWord(String word) {
-		
+		// TODO implement function
 	}
 	
 	@Override
 	public void paintComponent(Graphics g){
-		
+		// TODO implement function
 	}
 
 	public int getRows() {

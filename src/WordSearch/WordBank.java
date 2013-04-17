@@ -9,11 +9,11 @@ public class WordBank extends JPanel{
 	private Map<String, JCheckBox> wordBank;
 	
 	public WordBank() {
-		// TODO Auto-generated constructor stub
+		// TODO create constructor
 	}
 	
 	public void checkBox(String guess){
-		
+		// TODO implement function
 	}
 
 	public Map<String, JCheckBox> getWordBank() {
