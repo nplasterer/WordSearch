@@ -5,6 +5,9 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
 
+/**
+ * @author Naomi Plasterer, Brandon Bosso, Jason Steinberg, Austin Diviness
+ */
 
 public class Game extends JFrame{
 	private String playerName;

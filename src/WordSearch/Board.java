@@ -3,6 +3,9 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
+/**
+ * @author Naomi Plasterer, Brandon Bosso, Jason Steinberg, Austin Diviness
+ */
 
 public class Board extends JPanel {
 	private int rows;

@@ -4,6 +4,9 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
+/**
+ * @author Naomi Plasterer, Brandon Bosso, Jason Steinberg, Austin Diviness
+ */
 
 public class SplashScreen extends JDialog {
 	private JTextField playerName;

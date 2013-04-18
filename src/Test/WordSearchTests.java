@@ -21,17 +21,27 @@ import WordSearch.SplashScreen;
 import WordSearch.WordBank;
 
 
+/**
+ * @author Naomi Plasterer, Brandon Bosso, Jason Steinberg, Austin Diviness
+ */
+
 public class WordSearchTests {
 	
 	private static Game testGame;
 	
-	//Create test word search
+	/**
+	 * Creates a test word search for testing.
+	 */
 	@BeforeClass
 	public static void setUp() {
 		testGame = new Game();
 		testGame.loadConfigFile("Cats.txt");
 	}
 
+	/** 
+	 * Loads words and then tests if words are loaded correctly in the game.
+	 * Will fail if file loaded does not load certain words in the file.
+	 */
 	@Test
 	public void testLoadingWords() {
 		ArrayList<String> words = new ArrayList<String>();
@@ -50,6 +60,10 @@ public class WordSearchTests {
 		assertTrue(words.contains("Jeep"));
 	}
 	
+	/**
+	 * Loads file names and then tests if file names are loaded correctly.
+	 * Will fail if certain file is not loaded.
+	 */
 	@Test
 	public void testLoadFileNames() {
 		ArrayList<String> files = new ArrayList<String>();
@@ -59,6 +73,9 @@ public class WordSearchTests {
 		assertTrue(files.contains("Automobiles"));
 	}
 
+	/**
+	 * Creates a SplashScreen and then tests to make sure certain categories are present.
+	 */
 	@Test
 	public void testSplashScreen() {
 		SplashScreen splashy = new SplashScreen();
@@ -71,7 +88,10 @@ public class WordSearchTests {
 		Assert.assertEquals("Automobiles", testGame.getCategory());
 	}
 	
-	//check selection is valid
+	/**
+	 * Test if two selected points are valid.
+	 * Will fail if selected points are not in the same column, row, or diagonal.
+	 */
 	@Test
 	public void testValidSelection() {
 		//test same column
@@ -90,7 +110,10 @@ public class WordSearchTests {
 		assertFalse(testGame.checkValidSelection(new Point(5,5), new Point(5,9)));
 	}
 	
-	//check word is correct
+	/**
+	 * Tests to see if word selected is correct
+	 * Will fail if a word selected is not a valid word in file.
+	 */
 	@Test
 	public void testValidWord() {
 		assertTrue(testGame.checkValidWord("Calico"));
@@ -102,6 +125,10 @@ public class WordSearchTests {
 		assertFalse(testGame.checkValidWord("Mitsubishi"));
 	}
 		
+	/**
+	 * Test that correct characters are in the correct cells on the board.
+	 * Will fail if the characters are located in correct cells.
+	 */
 	@Test
 	public void testCellCharacters() {
 		Board testBoard = new Board();
@@ -127,12 +154,20 @@ public class WordSearchTests {
 		}
 	}
 	
+	/**
+	 * Tests if game can finish when there are zero words left to find.
+	 * Will fail if zero words left does not finish game.
+	 */
 	@Test
 	public void testGameEnds() {
 		testGame.setWordsLeft(0);
 		Assert.assertTrue(testGame.checkIfDone());
 	}
 	
+	/**
+	 * Tests that correct words are in word bank and can be selected.
+	 * Will fail if selected word is not in word bank.
+	 */
 	@Test
 	public void testWordBank() {
 		WordBank bank = testGame.getWordBank();
@@ -149,6 +184,10 @@ public class WordSearchTests {
 		assertFalse(bank.getWordBank().get("Persian").isSelected());
 	}
 	
+	/**
+	 * Tests if word can be highlighted between two points.
+	 * Will fail if the spots between the two points are not highlighted.
+	 */
 	@Test
 	public void testHighlightingWords() {
 		Point start = new Point(0,0);

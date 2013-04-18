@@ -4,6 +4,9 @@ import java.util.Map;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
+/**
+ * @author Naomi Plasterer, Brandon Bosso, Jason Steinberg, Austin Diviness
+ */
 
 public class WordBank extends JPanel{
 	private Map<String, JCheckBox> wordBank;

@@ -2,6 +2,9 @@ package WordSearch;
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+ * @author Naomi Plasterer, Brandon Bosso, Jason Steinberg, Austin Diviness
+ */
 
 public class Cell {
 	private int row;
