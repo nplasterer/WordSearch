@@ -127,7 +127,7 @@ public class WordSearchTests {
 		
 	/**
 	 * Test that correct characters are in the correct cells on the board.
-	 * Will fail if the characters are located in correct cells.
+	 * Will fail if the characters are located in incorrect cells.
 	 */
 	@Test
 	public void testCellCharacters() {
@@ -186,7 +186,7 @@ public class WordSearchTests {
 	
 	/**
 	 * Tests if word can be highlighted between two points.
-	 * Will fail if the spots between the two points are not highlighted.
+	 * Will fail if the cells between the two points are not highlighted.
 	 */
 	@Test
 	public void testHighlightingWords() {
