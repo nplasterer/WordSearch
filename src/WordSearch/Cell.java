@@ -23,4 +23,8 @@ public class Cell {
 	public char getLetter() {
 		return letter;
 	}
+	
+	public boolean isHighlighted() {
+		return highlighted;
+	}
 }

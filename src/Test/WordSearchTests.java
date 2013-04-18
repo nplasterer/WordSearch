@@ -151,6 +151,12 @@ public class WordSearchTests {
 	
 	@Test
 	public void testHighlightingWords() {
-		fail("Not yet implemented");
+		Point start = new Point(0,0);
+		Point end = new Point(3,3);
+		testGame.highlightWords(start, end);
+		for(int i = 0; i < 4; i++) {
+			Cell c = testGame.getBoard().getCellAt(i, i);
+			assertTrue(c.isHighlighted());
+		}
 	}
 }

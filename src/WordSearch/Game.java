@@ -46,6 +46,10 @@ public class Game extends JFrame{
 		return false;
 	}
 	
+	public void highlightWords(Point start, Point end) {
+		
+	}
+	
 	public String getCategory() {
 		return category;
 	}
