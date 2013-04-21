@@ -12,8 +12,11 @@ public class Board extends JPanel {
 	private int columns;
 	private Cell[][] cells;
 	
-	public Board() {
-		// TODO create constructor
+	public Board(int rows, int columns, ArrayList<String> words) {
+		this.rows = rows;
+		this.columns = columns;
+		this.cells = new Cell[rows][columns];
+		generatePuzzle(words);
 	}
 	
 	public void generatePuzzle(ArrayList<String> words){
@@ -26,7 +29,15 @@ public class Board extends JPanel {
 	
 	@Override
 	public void paintComponent(Graphics g){
-		// TODO implement function
+		int height = this.getHeight()/rows;
+		int width = this.getWidth()/columns;
+		Cell.setHeight(height);
+		Cell.setWidth(width);
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < columns; j++) {
+				cells[i][j].draw(g);
+			}
+		}
 	}
 
 	public int getRows() {

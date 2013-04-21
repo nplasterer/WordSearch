@@ -1,5 +1,6 @@
 package WordSearch;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -19,10 +20,38 @@ public class Cell {
 		// TODO create constructor. should there be an additional, parameterized constructor?
 	}
 	
-	public void draw(Graphics g){
-		// TODO implement function
+	public Cell(int row, int column, char letter) {
+		this.row = row;
+		this.column = column;
+		this.letter = letter;
 	}
 	
+	public void draw(Graphics g){
+		//draw cell outline
+		g.setColor(Color.black);
+		g.drawRect(column*width, row*width, width, height);
+		
+		//if highlighted, fill rectangle with yellow
+		if(highlighted) {
+			g.setColor(Color.yellow);
+			g.fillRect(column*width, row*width, width, height);
+		}
+		
+		//Place character in cell
+		Font font = new Font("Verdana", Font.PLAIN, height/2);
+		g.setFont(font);
+		g.setColor(Color.black);
+		g.drawString(Character.toString(letter), column*width+width/2, height*row+row/2);
+	}
+	
+	public static void setWidth(int width) {
+		Cell.width = width;
+	}
+
+	public static void setHeight(int height) {
+		Cell.height = height;
+	}
+
 	public char getLetter() {
 		return letter;
 	}
