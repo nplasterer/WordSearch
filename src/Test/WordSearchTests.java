@@ -45,14 +45,14 @@ public class WordSearchTests {
 	@Test
 	public void testLoadingWords() {
 		ArrayList<String> words = new ArrayList<String>();
-		words = testGame.getListofLinesFromFile("SecretFiles", "Cats.txt");
+		words = testGame.getListOfLinesFromFile("SecretFiles", "Cats.txt");
 		assertEquals(15, words.size());
 		assertTrue(words.contains("Calico"));
 		assertTrue(words.contains("Siamese"));
 		assertTrue(words.contains("Bengal"));
 		assertTrue(words.contains("Toyger"));
 		
-		words = testGame.getListofLinesFromFile("SecretFiles", "Automobiles.txt");
+		words = testGame.getListOfLinesFromFile("SecretFiles", "Automobiles.txt");
 		assertEquals(11, words.size());
 		assertTrue(words.contains("Dodge"));
 		assertTrue(words.contains("Mitsubishi"));
@@ -67,7 +67,7 @@ public class WordSearchTests {
 	@Test
 	public void testLoadFileNames() {
 		ArrayList<String> files = new ArrayList<String>();
-		files = testGame.getListofFiles("SecretFiles", ".txt", true);
+		files = testGame.getListOfFiles("SecretFiles", ".txt", true);
 		assertEquals(2, files.size());
 		assertTrue(files.contains("Cats"));
 		assertTrue(files.contains("Automobiles"));
