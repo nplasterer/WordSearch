@@ -12,6 +12,10 @@ public class Board extends JPanel {
 	private int columns;
 	private Cell[][] cells;
 	
+	public Board() {
+		
+	}
+	
 	public Board(int rows, int columns, ArrayList<String> words) {
 		this.rows = rows;
 		this.columns = columns;
