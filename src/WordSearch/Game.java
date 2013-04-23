@@ -146,4 +146,12 @@ public class Game extends JFrame{
 		return null;
 	}
 	
+	public void setPlayerName(String name) {
+		this.playerName = name;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
 }
