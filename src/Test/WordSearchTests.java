@@ -84,10 +84,12 @@ public class WordSearchTests {
 		SplashScreen splashy = new SplashScreen(lists, testGame);
 		splashy.setCategoriesText("Cats");
 		splashy.click();
+		testGame.setCategory(splashy.getCategory());
 		Assert.assertEquals("Cats", testGame.getCategory());
 		
 		splashy.setCategoriesText("Automobiles");
 		splashy.click();
+		testGame.setCategory(splashy.getCategory());
 		Assert.assertEquals("Automobiles", testGame.getCategory());
 	}
 	

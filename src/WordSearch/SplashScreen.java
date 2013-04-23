@@ -101,6 +101,10 @@ public class SplashScreen extends JDialog {
 		}
 		
 	}
+	
+	public String getCategory() {
+		return (String) categories.getSelectedItem();
+	}
 
 	public void setCategoriesText(String category) {
 		categories.setSelectedItem(category);
