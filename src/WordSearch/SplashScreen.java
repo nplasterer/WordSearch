@@ -25,7 +25,26 @@ public class SplashScreen extends JDialog {
 	private Game game;
 	
 	public SplashScreen() {
-		
+		// TODO This should be fleshed out better as a default case
+		playerName = new JTextField();
+		categories = new JComboBox();
+		okButton = new JButton("OK");
+		nameLabel = new JLabel("Enter Name: ");
+		categoryLabel = new JLabel("Select a category: ");
+		this.game = null;
+		categories = null;
+		//instantiate frame
+		setSize(new Dimension(400,300));
+		setLayout(new GridLayout(3,2));
+		setTitle("Welcome!");
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		okButton.addActionListener(new buttonListener());
+		//add components
+		add(nameLabel);
+		add(playerName);
+		add(categoryLabel);
+		add(categories);
+		add(okButton);
 	}
 	
 	public SplashScreen(ArrayList<String> words, Game game) {

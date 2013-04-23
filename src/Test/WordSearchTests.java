@@ -78,7 +78,10 @@ public class WordSearchTests {
 	 */
 	@Test
 	public void testSplashScreen() {
-		SplashScreen splashy = new SplashScreen();
+		ArrayList<String> lists = new ArrayList<String>();
+		lists.add("Automobiles");
+		lists.add("Cats");
+		SplashScreen splashy = new SplashScreen(lists, testGame);
 		splashy.setCategoriesText("Cats");
 		splashy.click();
 		Assert.assertEquals("Cats", testGame.getCategory());
