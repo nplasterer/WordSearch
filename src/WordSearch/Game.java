@@ -89,6 +89,11 @@ public class Game extends JFrame{
 		return wordBank;
 	}
 	
+	public void setWordBank(WordBank bank) {
+		// TODO should this set the words left?
+		wordBank = bank;
+	}
+	
 	public Board getBoard() {
 		return board;
 	}

@@ -121,6 +121,7 @@ public class WordSearchTests {
 	 */
 	@Test
 	public void testValidWord() {
+		testGame.setWordBank(new WordBank(testGame.getListOfLinesFromFile("SecretFiles", "Cats.txt")));
 		assertTrue(testGame.checkValidWord("Calico"));
 		assertTrue(testGame.checkValidWord("Bengal"));
 		assertTrue(testGame.checkValidWord("Highlander"));
