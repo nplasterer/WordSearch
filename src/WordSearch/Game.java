@@ -48,12 +48,25 @@ public class Game extends JFrame{
 	
 	public boolean checkValidWord(String word){
 		// TODO implement function
-		return false;
+		return wordBank.contains(word);
 	}
 	
 	public boolean checkValidSelection(Point start, Point end){
-		// TODO implement function
-		return false;
+		// checks rows, cols, \ diagonal, / diagonal
+		boolean flag = false;
+		if (start.x == end.x) {
+			flag = true;
+		}
+		else if (start.y == end.y) {
+			flag = true;
+		}
+		else if ((start.x - start.y) == (end.x - end.y)) {
+			flag = true;
+		}
+		else if ((start.x + start.y) == (end.x + end.y)) {
+			flag = true;
+		}
+		return flag;
 	}
 	
 	public void highlightWords(Point start, Point end) {

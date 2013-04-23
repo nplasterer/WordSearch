@@ -43,7 +43,9 @@ public class WordBank extends JPanel{
 		}
 	}
 	
-
+	public boolean contains(String word) {
+		return wordBank.containsKey(word);
+	}
 	
 	public void checkBox(String guess){
 		JCheckBox box = wordBank.get(guess);

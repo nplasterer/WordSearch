@@ -112,7 +112,7 @@ public class WordSearchTests {
 		//test invalid selections
 		assertFalse(testGame.checkValidSelection(new Point(5,5), new Point(1,12)));
 		assertFalse(testGame.checkValidSelection(new Point(7,8), new Point(3,2)));
-		assertFalse(testGame.checkValidSelection(new Point(5,5), new Point(5,9)));
+		assertFalse(testGame.checkValidSelection(new Point(5,5), new Point(6,9)));
 	}
 	
 	/**
