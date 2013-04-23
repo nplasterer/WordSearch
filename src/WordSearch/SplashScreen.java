@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 public class SplashScreen extends JDialog {
 	private JTextField playerName;
-	private JComboBox categories;
+	private JComboBox<String> categories;
 	private JButton okButton;
 	private JLabel nameLabel, categoryLabel;
 	private Game game;
@@ -27,7 +27,7 @@ public class SplashScreen extends JDialog {
 	public SplashScreen() {
 		// TODO This should be fleshed out better as a default case
 		playerName = new JTextField();
-		categories = new JComboBox();
+		categories = new JComboBox<String>();
 		okButton = new JButton("OK");
 		nameLabel = new JLabel("Enter Name: ");
 		categoryLabel = new JLabel("Select a category: ");
@@ -50,7 +50,7 @@ public class SplashScreen extends JDialog {
 	public SplashScreen(ArrayList<String> words, Game game) {
 		//instantiate variables
 		playerName = new JTextField();
-		categories = new JComboBox();
+		categories = new JComboBox<String>();
 		okButton = new JButton("OK");
 		nameLabel = new JLabel("Enter Name: ");
 		categoryLabel = new JLabel("Select a category: ");
@@ -75,6 +75,7 @@ public class SplashScreen extends JDialog {
 		add(categoryLabel);
 		add(categories);
 		add(okButton);
+		setVisible(true);
 	}
 	
 	public class buttonListener implements ActionListener {

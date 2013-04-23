@@ -28,6 +28,8 @@ public class Game extends JFrame{
 	
 	public Game() {
 		// TODO create constructor
+		splashScreen = null;
+		
 	}
 	
 	public void loadConfigFile(String file){
@@ -154,4 +156,10 @@ public class Game extends JFrame{
 		this.category = category;
 	}
 	
+	
+	public static void main(String[] args) {
+		Game game = new Game();
+		game.splashScreen = new SplashScreen(game.getListOfFiles("SecretFiles", "", true), game);
+		game.splashScreen.setVisible(true);
+	}
 }
