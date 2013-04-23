@@ -13,11 +13,15 @@ public class Cell {
 	private static Color color;
 	private char letter;
 	private static int width;
-	private static int height;
 	private boolean highlighted;
 	
 	public Cell() {
 		// TODO create constructor. should there be an additional, parameterized constructor?
+	}
+	
+	public Cell(int row, int column) {
+		this.row = row;
+		this.column = column;
 	}
 	
 	public Cell(int row, int column, char letter) {
@@ -26,31 +30,33 @@ public class Cell {
 		this.letter = letter;
 	}
 	
-	public void draw(Graphics g){
-		//draw cell outline
-		g.setColor(Color.black);
-		g.drawRect(column*width, row*width, width, height);
-		
+	public void draw(Graphics g){		
 		//if highlighted, fill rectangle with yellow
 		if(highlighted) {
 			g.setColor(Color.yellow);
-			g.fillRect(column*width, row*width, width, height);
+			g.fillRect(column*width, row*width, width, width);
+			g.setColor(Color.black);
+			g.drawRect(column*width, row*width, width, width);
+		}
+		
+		else {
+			g.setColor(Color.white);
+			g.fillRect(column*width, row*width, width, width);
+			g.setColor(Color.black);
+			g.drawRect(column*width, row*width, width, width);
 		}
 		
 		//Place character in cell
-		Font font = new Font("Verdana", Font.PLAIN, height/2);
+		Font font = new Font("Verdana", Font.PLAIN, width/2);
 		g.setFont(font);
 		g.setColor(Color.black);
-		g.drawString(Character.toString(letter), column*width+width/2, height*row+row/2);
+		g.drawString(Character.toString(letter), (int) (column*width+(.33 * width)), (int) (width*row+(.75 * width)));
 	}
 	
 	public static void setWidth(int width) {
 		Cell.width = width;
 	}
 
-	public static void setHeight(int height) {
-		Cell.height = height;
-	}
 
 	public char getLetter() {
 		return letter;
