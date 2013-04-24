@@ -38,8 +38,10 @@ public class Game extends JFrame{
 	
 	
 	public boolean checkIfDone(){
-		// TODO implement function
-		return false;
+		if(wordsLeft == 0)
+			return true;
+		else	
+			return false;
 	}
 	
 	public void showWinScreen(){
