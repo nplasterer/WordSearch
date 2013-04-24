@@ -21,14 +21,14 @@ import javax.swing.JTextField;
 
 public class SplashScreen extends JDialog {
 	private JTextField playerName;
-	private JComboBox<String> categories;
+	private JComboBox categories;
 	private JButton okButton;
 	private JLabel nameLabel, categoryLabel;
 	
 	public SplashScreen() {
 		// TODO This should be fleshed out better as a default case
 		playerName = new JTextField();
-		categories = new JComboBox<String>();
+		categories = new JComboBox();
 		okButton = new JButton("OK");
 		nameLabel = new JLabel("Enter Name: ");
 		categoryLabel = new JLabel("Select a category: ");
@@ -52,7 +52,7 @@ public class SplashScreen extends JDialog {
 	public SplashScreen(ArrayList<String> words) {
 		//instantiate variables
 		playerName = new JTextField();
-		categories = new JComboBox<String>();
+		categories = new JComboBox();
 		okButton = new JButton("OK");
 		nameLabel = new JLabel("Enter Name: ");
 		categoryLabel = new JLabel("Select a category: ");

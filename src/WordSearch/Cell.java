@@ -65,4 +65,8 @@ public class Cell {
 	public boolean isHighlighted() {
 		return highlighted;
 	}
+	
+	public void highlight() {
+		highlighted = true;
+	}
 }

@@ -74,4 +74,8 @@ public class Board extends JPanel {
 		frame.add(board);
 		frame.setVisible(true);
 	}
+	
+	public void highlight(int row, int col) {
+		cells[row][col].highlight();
+	}
 }

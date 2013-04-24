@@ -93,7 +93,11 @@ public class Game extends JFrame{
 	}
 	
 	public void highlightWords(Point start, Point end) {
-		
+		for (int i = start.x; i <= end.x; ++i) {
+			for (int j = start.y; j <= end.y; ++j) {
+				board.highlight(j, i);
+			}
+		}
 	}
 	
 	public String getCategory() {
