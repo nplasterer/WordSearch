@@ -1,4 +1,5 @@
 package WordSearch;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
@@ -22,7 +24,6 @@ public class SplashScreen extends JDialog {
 	private JComboBox<String> categories;
 	private JButton okButton;
 	private JLabel nameLabel, categoryLabel;
-	private Game game;
 	
 	public SplashScreen() {
 		// TODO This should be fleshed out better as a default case
@@ -31,34 +32,35 @@ public class SplashScreen extends JDialog {
 		okButton = new JButton("OK");
 		nameLabel = new JLabel("Enter Name: ");
 		categoryLabel = new JLabel("Select a category: ");
-		this.game = null;
 		categories = null;
+		JPanel panel = new JPanel();
 		//instantiate frame
 		setSize(new Dimension(400,300));
-		setLayout(new GridLayout(3,2));
+		panel.setLayout(new GridLayout(2,2));
 		setTitle("Welcome!");
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		okButton.addActionListener(new buttonListener());
 		//add components
-		add(nameLabel);
-		add(playerName);
-		add(categoryLabel);
-		add(categories);
-		add(okButton);
+		panel.add(nameLabel);
+		panel.add(playerName);
+		panel.add(categoryLabel);
+		panel.add(categories);
+		add(panel, BorderLayout.CENTER);
+		add(okButton, BorderLayout.SOUTH);
 	}
 	
-	public SplashScreen(ArrayList<String> words, Game game) {
+	public SplashScreen(ArrayList<String> words) {
 		//instantiate variables
 		playerName = new JTextField();
 		categories = new JComboBox<String>();
 		okButton = new JButton("OK");
 		nameLabel = new JLabel("Enter Name: ");
 		categoryLabel = new JLabel("Select a category: ");
-		this.game = game;
+		JPanel panel = new JPanel();
 		
 		//instantiate frame
 		setSize(new Dimension(400,300));
-		setLayout(new GridLayout(3,2));
+		panel.setLayout(new GridLayout(2,2));
 		setTitle("Welcome!");
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		
@@ -70,11 +72,12 @@ public class SplashScreen extends JDialog {
 		
 		
 		//add components
-		add(nameLabel);
-		add(playerName);
-		add(categoryLabel);
-		add(categories);
-		add(okButton);
+		panel.add(nameLabel);
+		panel.add(playerName);
+		panel.add(categoryLabel);
+		panel.add(categories);
+		add(panel, BorderLayout.CENTER);
+		add(okButton, BorderLayout.SOUTH);
 		setVisible(true);
 	}
 	
@@ -86,13 +89,7 @@ public class SplashScreen extends JDialog {
 			
 			//if player has entered name, set name and category
 			if(name.length() != 0) {
-				//set player name
-				getGame().setPlayerName(name);
-				//set word file
-				String category = (String) categories.getSelectedItem();
-				getGame().setCategory(category + ".txt");
-				//close screen
-				dispose();
+				setVisible(false);
 			}
 			//otherwise give error message
 			else {
@@ -100,6 +97,10 @@ public class SplashScreen extends JDialog {
 			}
 		}
 		
+	}
+	
+	public String getPlayerName() {
+		return playerName.getText();
 	}
 	
 	public String getCategory() {
@@ -114,9 +115,6 @@ public class SplashScreen extends JDialog {
 		okButton.doClick();
 	}
 	
-	public Game getGame() {
-		return game;
-	}
 	
 	public static void main(String[] args) {
 		Game game = new Game();
@@ -124,7 +122,7 @@ public class SplashScreen extends JDialog {
 		words.add("Brandon");
 		words.add("Dylon");
 		words.add("Clayton");
-		SplashScreen screen = new SplashScreen(words,game);
+		SplashScreen screen = new SplashScreen(words);
 		screen.setVisible(true);
 	}
 }

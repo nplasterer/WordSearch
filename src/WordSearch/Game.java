@@ -1,4 +1,5 @@
 package WordSearch;
+import java.awt.BorderLayout;
 import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,10 +28,30 @@ public class Game extends JFrame{
 	private SplashScreen splashScreen;
 	
 	public Game() {
-		// TODO create constructor
-		splashScreen = null;
+		//initialize frame
+		setSize(700, 600);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//initialize variables
+		start = null;
+		end = null;
+		
+		//create splash screen and get player name and category file
+		splashScreen = new SplashScreen(getListOfFiles("SecretFiles", ".txt", true));
+		//need a way to wait here for player to press button
+		playerName = splashScreen.getPlayerName();
+		category = splashScreen.getCategory() + ".txt";
+		
+		words = getListOfLinesFromFile("SecretFiles", category);
+		wordsLeft = words.size();
+		board = new Board(20, 20, words);
+		this.add(board, BorderLayout.CENTER);
+		
+		wordBank = new WordBank(words);
+		this.add(wordBank, BorderLayout.EAST);
 		
 	}
+	
 	
 	public void loadConfigFile(String file){
 		// TODO implement function
@@ -179,7 +200,7 @@ public class Game extends JFrame{
 	
 	public static void main(String[] args) {
 		Game game = new Game();
-		game.splashScreen = new SplashScreen(game.getListOfFiles("SecretFiles", "", true), game);
-		game.splashScreen.setVisible(true);
+		game.setVisible(true);
+		//game.splashScreen.setVisible(true);
 	}
 }

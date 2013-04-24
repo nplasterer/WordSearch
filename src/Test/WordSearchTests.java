@@ -81,7 +81,7 @@ public class WordSearchTests {
 		ArrayList<String> lists = new ArrayList<String>();
 		lists.add("Automobiles");
 		lists.add("Cats");
-		SplashScreen splashy = new SplashScreen(lists, testGame);
+		SplashScreen splashy = new SplashScreen(lists);
 		splashy.setCategoriesText("Cats");
 		splashy.click();
 		testGame.setCategory(splashy.getCategory());
@@ -176,11 +176,12 @@ public class WordSearchTests {
 	 */
 	@Test
 	public void testWordBank() {
-		WordBank bank = testGame.getWordBank();
+		ArrayList<String> words = testGame.getListOfLinesFromFile("SecretFiles", "Cats.txt");
+		WordBank bank = new WordBank(words);
 		bank.checkBox("Calico");
 		bank.checkBox("Siamese");
 		bank.checkBox("Bengal");
-		Assert.assertEquals(testGame.getWords().size(), bank.getWordBank().size());
+		Assert.assertEquals(words.size(), bank.getWordBank().size());
 		
 		
 		assertTrue(bank.getWordBank().get("Calico").isSelected());
