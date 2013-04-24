@@ -91,6 +91,7 @@ public class SplashScreen extends JDialog {
 			//if player has entered name, set name and category
 			if(name.length() != 0) {
 				setVisible(false);
+				Game.currentGame.loadConfigFile(categories.getSelectedItem() + ".txt");
 			}
 			//otherwise give error message
 			else {

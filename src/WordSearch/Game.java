@@ -24,6 +24,7 @@ public class Game extends JFrame{
 	private String playerName;
 	private GregorianCalendar time;
 	private String category;
+	public static Game currentGame;
 	//private ArrayList<String> words;
 	private int wordsLeft;
 	private Point start;
@@ -58,18 +59,8 @@ public class Game extends JFrame{
 		
 		//create splash screen and get player name and category file
 		splashScreen = new SplashScreen(getListOfFiles("SecretFiles", ".txt", true));
-		//need a way to wait here for player to press button
-		playerName = splashScreen.getPlayerName();
-		category = splashScreen.getCategory() + ".txt";
-		
-		ArrayList<String> words = getListOfLinesFromFile("SecretFiles", category);
-		wordsLeft = words.size();
-		board = new Board(20, 20, words);
-		this.add(board, BorderLayout.CENTER);
-		
-		wordBank = new WordBank(words);
-		this.add(wordBank, BorderLayout.EAST);
-		
+
+		currentGame = this;
 	}
 	
 	private class fileListener implements ActionListener {
@@ -90,7 +81,16 @@ public class Game extends JFrame{
 	
 	
 	public void loadConfigFile(String file){
-		// TODO implement function
+		playerName = splashScreen.getPlayerName();
+		ArrayList<String> words = getListOfLinesFromFile("SecretFiles", file);
+		wordsLeft = words.size();
+		board = new Board(20, 20, words);
+		this.add(board, BorderLayout.CENTER);
+		
+		wordBank = new WordBank(words);
+		this.add(wordBank, BorderLayout.EAST);
+		
+		this.setVisible(true);
 	}
 	
 	
@@ -259,8 +259,8 @@ public class Game extends JFrame{
 	
 	public static void main(String[] args) {
 		Game game = new Game();
-		game.setVisible(true);
-		game.highlightWords(new Point(0,0), new Point(5,5));
+		//game.setVisible(true);
+		//game.highlightWords(new Point(0,0), new Point(5,5));
 		//game.splashScreen.setVisible(true);
 	}
 }

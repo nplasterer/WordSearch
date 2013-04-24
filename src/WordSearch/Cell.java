@@ -22,7 +22,7 @@ public class Cell {
 	public Cell(int row, int column) {
 		this.row = row;
 		this.column = column;
-		letter = 'K';
+		//letter = 'K';
 	}
 
 
@@ -52,7 +52,7 @@ public class Cell {
 		Font font = new Font("Verdana", Font.PLAIN, width/2);
 		g.setFont(font);
 		g.setColor(Color.black);
-		g.drawString(Character.toString(letter), (int) (column*width+(.33 * width)), (int) (width*row+(.75 * width)));
+		g.drawString(Character.toString(letter).toUpperCase(), (int) (column*width+(.33 * width)), (int) (width*row+(.75 * width)));
 	}
 	
 	public static void setWidth(int width) {

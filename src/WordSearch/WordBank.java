@@ -21,8 +21,8 @@ public class WordBank extends JPanel{
 	private Map<String, JCheckBox> wordBank;
 	
 	public WordBank(ArrayList<String> words) {
-		this.setLayout(new GridLayout(words.size(),2));
-		this.setSize(new Dimension(100, 600));
+		this.setLayout(new GridLayout(0, 2));
+		this.setSize(new Dimension(200, 600));
 		wordBank = new HashMap<String, JCheckBox>();
 		//create check boxes
 		for(String s : words) {
