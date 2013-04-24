@@ -40,6 +40,7 @@ public class SplashScreen extends JDialog {
 		setTitle("Welcome!");
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		okButton.addActionListener(new buttonListener());
+
 		//add components
 		panel.add(nameLabel);
 		panel.add(playerName);

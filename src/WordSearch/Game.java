@@ -1,6 +1,8 @@
 package WordSearch;
 import java.awt.BorderLayout;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,6 +12,9 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 /**
  * @author Naomi Plasterer, Brandon Bosso, Jason Steinberg, Austin Diviness
@@ -26,6 +31,9 @@ public class Game extends JFrame{
 	private Board board;
 	private WordBank wordBank;
 	private SplashScreen splashScreen;
+	private JMenuBar menu;
+	private JMenu file;
+	private JMenuItem play, exit;
 	
 	public Game() {
 		//initialize frame
@@ -35,6 +43,18 @@ public class Game extends JFrame{
 		//initialize variables
 		start = null;
 		end = null;
+		
+		//create JMenuBar
+		menu = new JMenuBar();
+		file = new JMenu("File");
+		play = new JMenuItem("Play/Pause");
+		exit = new JMenuItem("Exit");
+		play.addActionListener(new fileListener());
+		exit.addActionListener(new fileListener());
+		file.add(play);
+		file.add(exit);
+		menu.add(file);
+		setJMenuBar(menu);
 		
 		//create splash screen and get player name and category file
 		splashScreen = new SplashScreen(getListOfFiles("SecretFiles", ".txt", true));
@@ -49,6 +69,22 @@ public class Game extends JFrame{
 		
 		wordBank = new WordBank(words);
 		this.add(wordBank, BorderLayout.EAST);
+		
+	}
+	
+	private class fileListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == play) {
+				if(board.isVisible())
+					board.setVisible(false);
+				else
+					board.setVisible(true);
+			}
+			else if(e.getSource() == exit) 
+				System.exit(0);
+		}
 		
 	}
 	
@@ -108,7 +144,7 @@ public class Game extends JFrame{
         // / diagonal word
         else if (start.x + start.y == end.x + end.y) {
             for (int i = 0; i < (end.x - start.x); ++i) {
-                board.hightlight(start.y + i, start.x - i);
+                board.highlight(start.y + i, start.x - i);
             }
         }
         // \ diagonal
