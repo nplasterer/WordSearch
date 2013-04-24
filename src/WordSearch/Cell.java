@@ -62,6 +62,10 @@ public class Cell {
 		return letter;
 	}
 	
+	public void setLetter(char c) {
+		letter = c;
+	}
+	
 	public boolean isHighlighted() {
 		return highlighted;
 	}

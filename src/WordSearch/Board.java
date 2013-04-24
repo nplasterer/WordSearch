@@ -37,6 +37,9 @@ public class Board extends JPanel {
 	
 	public void insertWord(String word) {
 		// TODO implement function
+		for (int i = 0; i < word.length(); ++i) {
+			cells[0][i].setLetter(word.charAt(i));
+		}
 	}
 	
 	@Override
