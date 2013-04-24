@@ -22,8 +22,10 @@ public class Cell {
 	public Cell(int row, int column) {
 		this.row = row;
 		this.column = column;
+		letter = 'K';
 	}
-	
+
+
 	public Cell(int row, int column, char letter) {
 		this.row = row;
 		this.column = column;
@@ -72,5 +74,12 @@ public class Cell {
 	
 	public void highlight() {
 		highlighted = true;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Cell [row=" + row + ", column=" + column + ", highlighted="
+				+ highlighted + "]";
 	}
 }

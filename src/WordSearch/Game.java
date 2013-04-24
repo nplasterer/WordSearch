@@ -24,7 +24,7 @@ public class Game extends JFrame{
 	private String playerName;
 	private GregorianCalendar time;
 	private String category;
-	private ArrayList<String> words;
+	//private ArrayList<String> words;
 	private int wordsLeft;
 	private Point start;
 	private Point end;
@@ -62,7 +62,7 @@ public class Game extends JFrame{
 		playerName = splashScreen.getPlayerName();
 		category = splashScreen.getCategory() + ".txt";
 		
-		words = getListOfLinesFromFile("SecretFiles", category);
+		ArrayList<String> words = getListOfLinesFromFile("SecretFiles", category);
 		wordsLeft = words.size();
 		board = new Board(20, 20, words);
 		this.add(board, BorderLayout.CENTER);
@@ -143,13 +143,13 @@ public class Game extends JFrame{
         }
         // / diagonal word
         else if (start.x + start.y == end.x + end.y) {
-            for (int i = 0; i < (end.x - start.x); ++i) {
+            for (int i = 0; i <= (end.x - start.x); ++i) {
                 board.highlight(start.y + i, start.x - i);
             }
         }
         // \ diagonal
         else if (end.x - start.x == end.y - start.y) {
-            for (int i = 0; i < (end.x - start.x); ++i) {
+            for (int i = 0; i <= (end.x - start.x); ++i) {
                 board.highlight(start.x + i, start.x + i);
             }
         }
@@ -164,7 +164,7 @@ public class Game extends JFrame{
 	}
 	
 	public ArrayList<String> getWords() {
-		return words;
+		return wordBank.getWords();
 	}
 	
 	public WordBank getWordBank() {
@@ -260,6 +260,7 @@ public class Game extends JFrame{
 	public static void main(String[] args) {
 		Game game = new Game();
 		game.setVisible(true);
+		game.highlightWords(new Point(0,0), new Point(5,5));
 		//game.splashScreen.setVisible(true);
 	}
 }

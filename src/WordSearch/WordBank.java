@@ -56,5 +56,9 @@ public class WordBank extends JPanel{
 		return wordBank;
 	}
 	
+	public ArrayList<String> getWords() {
+		return new ArrayList<String>(wordBank.keySet());
+	}
+	
 
 }
