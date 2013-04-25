@@ -39,6 +39,7 @@ public class WordBank extends JPanel{
 			    }
 			    });
 			wordBank.put(s, box);
+			System.out.println(s);
 			add(box);
 		}
 	}

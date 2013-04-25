@@ -1,11 +1,11 @@
 package WordSearch;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -16,6 +16,8 @@ public class Board extends JPanel {
 	private int rows;
 	private int columns;
 	private Cell[][] cells;
+	private Point mousePress;
+	private Point mouseRelease;
 	
 	public Board() {
 		
@@ -25,6 +27,8 @@ public class Board extends JPanel {
 		this.rows = rows;
 		this.columns = columns;
 		this.cells = new Cell[rows][columns];
+		this.mousePress = null;
+		this.mouseRelease = null;
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < columns; j++) {
 				cells[i][j] = new Cell(i,j);
@@ -189,6 +193,77 @@ public class Board extends JPanel {
 		}
 	}
 
+	public void listen() {
+		this.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				int x = arg0.getX() / Cell.getWidth();
+				int y = arg0.getY() / Cell.getWidth();
+				mousePress = new Point(x, y);
+				System.out.println(mousePress.toString());
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				int x = arg0.getX() / Cell.getWidth();
+				int y = arg0.getY() / Cell.getWidth();
+				mouseRelease = new Point(x, y);
+				System.out.println(mouseRelease.toString());
+				Game.currentGame.runWord();
+			}
+			
+		});
+	}
+
+	public String getWordAt(Point start, Point end) {
+		String word = "";
+        // vertical word
+        if (start.x == end.x) {
+            for (int i = start.y; i <= end.y; ++i) {
+                word = word + cells[i][start.x].getLetter();
+            }
+        }
+        // horizontal word
+        else if (start.y == end.y) {
+            for (int i = start.x; i <= end.x; ++i) {
+                word = word + cells[start.y][i].getLetter();
+            }
+        }
+        // / diagonal word
+        else if (start.x + start.y == end.x + end.y) {
+            for (int i = 0; i <= (end.x - start.x); ++i) {
+                word = word + cells[start.y + i][start.x - i].getLetter();
+            }
+        }
+        // \ diagonal
+        else if (end.x - start.x == end.y - start.y) {
+            for (int i = 0; i <= (end.x - start.x); ++i) {
+                word = word + cells[start.x + i][start.x + i].getLetter();
+            }
+        }
+        return word;
+	}
+	
 	public int getRows() {
 		return rows;
 	}
@@ -211,5 +286,13 @@ public class Board extends JPanel {
 	
 	public void highlight(int row, int col) {
 		cells[row][col].highlight();
+	}
+	
+	public Point getMousePress() {
+		return mousePress;
+	}
+	
+	public Point getMouseRelease() {
+		return mouseRelease;
 	}
 }

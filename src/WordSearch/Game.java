@@ -104,6 +104,7 @@ public class Game extends JFrame{
 		
 		
 		this.setVisible(true);
+		board.listen();
 	}
 	
 	
@@ -271,6 +272,20 @@ public class Game extends JFrame{
 	
 	public static void startNewGame() {
 		Game game = new Game();
+
+	}
+	
+	public void runWord() {
+		Point start = board.getMousePress();
+		Point end = board.getMouseRelease();
+		if (checkValidSelection(start, end)) {
+			String word = board.getWordAt(start, end);
+			System.out.println(word);
+			if (checkValidWord(word)) {
+				System.out.println("valid");
+				this.highlightWords(start, end);
+			}
+		}
 	}
 	
 	

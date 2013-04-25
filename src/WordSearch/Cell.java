@@ -58,6 +58,10 @@ public class Cell {
 	public static void setWidth(int width) {
 		Cell.width = width;
 	}
+	
+	public static int getWidth() {
+		return Cell.width;
+	}
 
 
 	public char getLetter() {
