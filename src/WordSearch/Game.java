@@ -109,12 +109,7 @@ public class Game extends JFrame{
 	
 	
 	public boolean checkIfDone(){
-		if(wordsLeft == 0) {
-			showWinScreen();
-			return true;
-		}
-		else	
-			return false;
+		return (wordsLeft == 0) ? true : false;
 	}
 	
 	public void showWinScreen(){
@@ -319,7 +314,6 @@ public class Game extends JFrame{
 				if(!wordBank.getWordBank().get(word).isSelected()) {
 					wordBank.checkBox(word);
 					--wordsLeft;
-					checkIfDone();
 					this.highlightWords(start, end);
 				}
 			}
@@ -328,8 +322,10 @@ public class Game extends JFrame{
 					this.highlightWords(start, end);
 					wordBank.checkBox(new StringBuffer(word).reverse().toString());
 					--wordsLeft;
-					checkIfDone();
 				}
+			}
+			if (checkIfDone()) {
+				showWinScreen();
 			}
 		}
 	}
