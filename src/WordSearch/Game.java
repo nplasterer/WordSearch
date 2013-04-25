@@ -118,6 +118,8 @@ public class Game extends JFrame{
 	public void loadConfigFile(String file){
 		playerName = splashScreen.getPlayerName();
 		ArrayList<String> words = getListOfLinesFromFile("SecretFiles", file);
+		for(String s : words)
+			Character.toUpperCase(s.charAt(0));
 		wordsLeft = words.size();
 		wordBank = new WordBank(words);
 		this.add(wordBank, BorderLayout.EAST);
@@ -136,7 +138,8 @@ public class Game extends JFrame{
 	}
 	
 	public void showWinScreen(){
-		int reply = JOptionPane.showConfirmDialog(null, "Congratulations " + playerName + ", you win! Would you like to play again?", "Please choose an option", JOptionPane.YES_NO_OPTION);
+		ttimer.stop();
+		int reply = JOptionPane.showConfirmDialog(null, "Congratulations " + playerName + ", you win! Your time was " + timer.getTime() + System.getProperty("line.separator") + "Would you like to play again?", "Please choose an option", JOptionPane.YES_NO_OPTION);
 		if(reply == JOptionPane.YES_OPTION) {
 			dispose();
 			startNewGame();

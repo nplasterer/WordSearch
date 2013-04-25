@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class WordBank extends JPanel{
 		this.setSize(new Dimension(200, 600));
 		wordBank = new HashMap<String, JCheckBox>();
 		//create check boxes
+		Collections.sort(words);
 		for(String s : words) {
 			JCheckBox box = new JCheckBox(s);
 			//add action listener to disable checkbox
@@ -61,9 +63,10 @@ public class WordBank extends JPanel{
 	}
 	
 	public void removeWord(String word) {
+		
 		remove(wordBank.get(word));
+		wordBank.remove(word);
 		Game.currentGame.decreaseWordsLeft();
 	}
 	
-
 }

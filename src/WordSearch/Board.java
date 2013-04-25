@@ -78,7 +78,7 @@ public class Board extends JPanel {
                 }
             }
         }
-        // horizontal worda
+        // horizontal word
         else if (start.y == end.y) {
             for (int i = start.x; i < end.x; ++i) {
             	if(getCellAt(start.y, i).getLetter() != ' ' && !Character.toString(getCellAt(start.y, i).getLetter()).equalsIgnoreCase(Character.toString(toPlace.charAt(i - start.x)))) {
@@ -127,7 +127,7 @@ public class Board extends JPanel {
 					}
 				}
 				else {
-					insertWord(word, timesTried++);
+					insertWord(word, ++timesTried);
 				}
 				break;
 			//vertical
@@ -140,7 +140,7 @@ public class Board extends JPanel {
 					}
 				}
 				else {
-					insertWord(word, timesTried++);
+					insertWord(word, ++timesTried);
 				}
 				break;
 			// / diagonal
@@ -153,7 +153,7 @@ public class Board extends JPanel {
 					}
 				}
 				else {
-					insertWord(word, timesTried++);
+					insertWord(word, ++timesTried);
 				}
 				break;
 			// \ diagonal
@@ -166,7 +166,7 @@ public class Board extends JPanel {
 					}
 				}
 				else {
-					insertWord(word, timesTried++);
+					insertWord(word, ++timesTried);
 				}
 				break;
 			default:
@@ -174,7 +174,10 @@ public class Board extends JPanel {
 			}
 		}
 		else {
-			Game.currentGame.getWordBank().removeWord(word);
+			if(Character.isUpperCase(word.charAt(0))) 
+				Game.currentGame.getWordBank().removeWord(word);
+			else
+				Game.currentGame.getWordBank().removeWord(new StringBuffer(word).reverse().toString());
 		}
 	}
 	
