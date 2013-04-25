@@ -11,11 +11,14 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
 
 /**
  * @author Naomi Plasterer, Brandon Bosso, Jason Steinberg, Austin Diviness
@@ -23,7 +26,7 @@ import javax.swing.JOptionPane;
 
 public class Game extends JFrame{
 	private String playerName;
-	private GregorianCalendar time;
+	private Timer timer;
 	private String category;
 	public static Game currentGame;
 	//private ArrayList<String> words;
@@ -36,6 +39,8 @@ public class Game extends JFrame{
 	private JMenuBar menu;
 	private JMenu file;
 	private JMenuItem play, exit, newGame;
+	private JLabel timeDisplay;
+	javax.swing.Timer ttimer;
 	
 	public Game() {
 		currentGame = this;
@@ -46,9 +51,12 @@ public class Game extends JFrame{
 		//initialize variables
 		start = null;
 		end = null;
+		timer = new Timer();
+		ttimer = new javax.swing.Timer(1000, new TimerListener());
 		
 		//create JMenuBar
 		menu = new JMenuBar();
+		timeDisplay = new JLabel();
 		file = new JMenu("File");
 		play = new JMenuItem("Play/Pause");
 		exit = new JMenuItem("Exit");
@@ -60,6 +68,8 @@ public class Game extends JFrame{
 		file.add(newGame);
 		file.add(exit);
 		menu.add(file);
+		menu.add(Box.createHorizontalGlue());
+		menu.add(timeDisplay);
 		setJMenuBar(menu);
 		
 		//create splash screen and get player name and category file
@@ -68,11 +78,24 @@ public class Game extends JFrame{
 		
 	}
 	
+	private class TimerListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			Game.currentGame.getTimer().run();
+			
+		}
+		
+	}
+	
 	private class fileListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == play) {
+				//start/stop time
+				timer.pauseTime();
+				//hide/show board
 				if(board.isVisible())
 					board.setVisible(false);
 				else
@@ -330,6 +353,18 @@ public class Game extends JFrame{
 	
 	public void decreaseWordsLeft() {
 		wordsLeft--;
+	}
+	
+	public Timer getTimer() {
+		return timer;
+	}
+	
+	public void setDisplayTime() {
+		timeDisplay.setText(timer.getTime());
+	}
+	
+	public javax.swing.Timer getTTimer() {
+		return ttimer;
 	}
 	
 	

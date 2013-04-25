@@ -56,7 +56,7 @@ public class Board extends JPanel {
 		for(String s : wordsInOrder)
 			insertWord(s, 0);
 		
-		/*Random random = new Random();
+		Random random = new Random();
 		String alphabet = "abcdefghijklmnopqrstuvwxyz";
 		char letter = ' ';
 		for(int i = 0; i < rows; i++) {
@@ -66,7 +66,7 @@ public class Board extends JPanel {
 					getCellAt(i,j).setLetter(letter);
 				}
 			}
-		}*/
+		}
 	}
 	
 	public boolean checkValidLocation(Point start, Point end, String toPlace){
@@ -78,7 +78,7 @@ public class Board extends JPanel {
                 }
             }
         }
-        // horizontal word
+        // horizontal worda
         else if (start.y == end.y) {
             for (int i = start.x; i < end.x; ++i) {
             	if(getCellAt(start.y, i).getLetter() != ' ' && !Character.toString(getCellAt(start.y, i).getLetter()).equalsIgnoreCase(Character.toString(toPlace.charAt(i - start.x)))) {

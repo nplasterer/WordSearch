@@ -92,6 +92,9 @@ public class SplashScreen extends JDialog {
 			if(name.length() != 0) {
 				setVisible(false);
 				Game.currentGame.loadConfigFile(categories.getSelectedItem() + ".txt");
+				Game.currentGame.setDisplayTime();
+				Game.currentGame.getTimer().pauseTime();
+				Game.currentGame.getTTimer().start();
 			}
 			//otherwise give error message
 			else {
@@ -100,6 +103,7 @@ public class SplashScreen extends JDialog {
 		}
 		
 	}
+
 	
 	public String getPlayerName() {
 		return playerName.getText();
