@@ -315,17 +315,21 @@ public class Game extends JFrame{
 		String word;
 		if (checkValidSelection(start, end)) {
 			word = board.getWordAt(start, end);
-			if (checkValidWord(word)) {
-				this.highlightWords(start, end);
-				wordBank.checkBox(word);
-				--wordsLeft;
-				checkIfDone();
+			if (checkValidWord(word)) {	
+				if(!wordBank.getWordBank().get(word).isSelected()) {
+					wordBank.checkBox(word);
+					--wordsLeft;
+					checkIfDone();
+					this.highlightWords(start, end);
+				}
 			}
 			else if(checkValidWord(new StringBuffer(word).reverse().toString())) {
-				this.highlightWords(start, end);
-				wordBank.checkBox(new StringBuffer(word).reverse().toString());
-				--wordsLeft;
-				checkIfDone();
+				if(!wordBank.getWordBank().get(new StringBuffer(word).reverse().toString()).isSelected()) {
+					this.highlightWords(start, end);
+					wordBank.checkBox(new StringBuffer(word).reverse().toString());
+					--wordsLeft;
+					checkIfDone();
+				}
 			}
 		}
 	}
