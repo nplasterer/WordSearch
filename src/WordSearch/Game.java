@@ -146,13 +146,13 @@ public class Game extends JFrame{
         // vertical word
         if (start.x == end.x) {
             for (int i = start.y; i <= end.y; ++i) {
-                board.highlight(start.y, i);
+                board.highlight(i, start.x);
             }
         }
         // horizontal word
         else if (start.y == end.y) {
             for (int i = start.x; i <= end.x; ++i) {
-                board.highlight(i, start.x);
+                board.highlight(start.y, i);
             }
         }
         // / diagonal word
@@ -167,6 +167,7 @@ public class Game extends JFrame{
                 board.highlight(start.x + i, start.x + i);
             }
         }
+        board.repaint();
 	}
 	
 	public String getCategory() {
@@ -278,12 +279,15 @@ public class Game extends JFrame{
 	public void runWord() {
 		Point start = board.getMousePress();
 		Point end = board.getMouseRelease();
+		String word;
 		if (checkValidSelection(start, end)) {
-			String word = board.getWordAt(start, end);
+			word = board.getWordAt(start, end);
 			System.out.println(word);
 			if (checkValidWord(word)) {
 				System.out.println("valid");
 				this.highlightWords(start, end);
+				wordBank.checkBox(word);
+				--wordsLeft;
 			}
 		}
 	}
