@@ -56,7 +56,7 @@ public class Board extends JPanel {
 		for(String s : wordsInOrder)
 			insertWord(s, 0);
 		
-		Random random = new Random();
+		/*Random random = new Random();
 		String alphabet = "abcdefghijklmnopqrstuvwxyz";
 		char letter = ' ';
 		for(int i = 0; i < rows; i++) {
@@ -66,7 +66,7 @@ public class Board extends JPanel {
 					getCellAt(i,j).setLetter(letter);
 				}
 			}
-		}
+		}*/
 	}
 	
 	public boolean checkValidLocation(Point start, Point end, String toPlace){

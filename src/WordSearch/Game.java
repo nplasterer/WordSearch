@@ -118,12 +118,21 @@ public class Game extends JFrame{
 	public void loadConfigFile(String file){
 		playerName = splashScreen.getPlayerName();
 		ArrayList<String> words = getListOfLinesFromFile("SecretFiles", file);
-		for(String s : words)
-			Character.toUpperCase(s.charAt(0));
+		ArrayList<String> toAdd = new ArrayList<String>();
+		for(String s : words) {
+			String add = "";
+			for(int i = 0; i < s.length(); i ++) {
+				if(i == 0)
+					add += Character.toUpperCase(s.charAt(i));
+				else
+					add += Character.toLowerCase(s.charAt(i));
+			}
+			toAdd.add(add);
+		}
 		wordsLeft = words.size();
-		wordBank = new WordBank(words);
+		wordBank = new WordBank(toAdd);
 		this.add(wordBank, BorderLayout.EAST);
-		board = new Board(20, 20, words);
+		board = new Board(20, 20, toAdd);
 		this.add(board, BorderLayout.CENTER);
 		
 		
@@ -150,7 +159,14 @@ public class Game extends JFrame{
 	}
 	
 	public boolean checkValidWord(String word){
-		return wordBank.contains(word);
+		String toCheck = "";
+		for(int i = 0; i < word.length(); i++) {
+			if(i == 0)
+				toCheck += Character.toUpperCase(word.charAt(i));
+			else
+				toCheck += Character.toLowerCase(word.charAt(i));
+		}
+		return wordBank.contains(toCheck);
 	}
 	
 	public boolean checkValidSelection(Point start, Point end){
@@ -348,6 +364,7 @@ public class Game extends JFrame{
 					--wordsLeft;
 				}
 			}
+			
 			if (checkIfDone()) {
 				showWinScreen();
 			}
