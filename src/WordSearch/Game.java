@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  * @author Naomi Plasterer, Brandon Bosso, Jason Steinberg, Austin Diviness
@@ -34,7 +35,7 @@ public class Game extends JFrame{
 	private SplashScreen splashScreen;
 	private JMenuBar menu;
 	private JMenu file;
-	private JMenuItem play, exit;
+	private JMenuItem play, exit, newGame;
 	
 	public Game() {
 		currentGame = this;
@@ -51,9 +52,12 @@ public class Game extends JFrame{
 		file = new JMenu("File");
 		play = new JMenuItem("Play/Pause");
 		exit = new JMenuItem("Exit");
+		newGame = new JMenuItem("New Game");
+		newGame.addActionListener(new fileListener());
 		play.addActionListener(new fileListener());
 		exit.addActionListener(new fileListener());
 		file.add(play);
+		file.add(newGame);
 		file.add(exit);
 		menu.add(file);
 		setJMenuBar(menu);
@@ -73,6 +77,13 @@ public class Game extends JFrame{
 					board.setVisible(false);
 				else
 					board.setVisible(true);
+			}
+			else if(e.getSource() == newGame) {
+				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you would like to start a new game?", "Please choose an option", JOptionPane.YES_NO_OPTION);
+				if(reply == JOptionPane.YES_OPTION) {
+					dispose();
+					startNewGame();
+				}
 			}
 			else if(e.getSource() == exit) 
 				System.exit(0);
@@ -258,9 +269,13 @@ public class Game extends JFrame{
 		this.category = category;
 	}
 	
+	public static void startNewGame() {
+		Game game = new Game();
+	}
+	
 	
 	public static void main(String[] args) {
-		Game game = new Game();
+		startNewGame();
 		//game.setVisible(true);
 		//game.highlightWords(new Point(0,0), new Point(5,5));
 		//game.splashScreen.setVisible(true);
