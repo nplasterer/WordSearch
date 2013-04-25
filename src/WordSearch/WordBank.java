@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  * @author Naomi Plasterer, Brandon Bosso, Jason Steinberg, Austin Diviness
  */
 
-public class WordBank extends JPanel{
+public class WordBank extends JFrame{
 	private Map<String, JCheckBox> wordBank;
 	
 	public WordBank(ArrayList<String> words) {
@@ -62,7 +62,8 @@ public class WordBank extends JPanel{
 	}
 	
 	public void removeWord(String word) {
-		wordBank.get(word).setVisible(false);
+		remove(wordBank.get(word));
 	}
+	
 
 }
