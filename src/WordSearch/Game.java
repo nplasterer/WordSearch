@@ -124,7 +124,6 @@ public class Game extends JFrame{
 	}
 	
 	public boolean checkValidWord(String word){
-		// TODO implement function
 		return wordBank.contains(word);
 	}
 	
@@ -241,7 +240,6 @@ public class Game extends JFrame{
 			System.out.println("Unable to load file: " + dataPath + File.separatorChar + inputFile);
 			System.exit(1);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Unable to get path: " + dataPath + File.separatorChar + inputFile);
 			System.exit(1);

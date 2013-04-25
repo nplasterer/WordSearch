@@ -38,6 +38,7 @@ public class Board extends JPanel {
 	}
 	
 	public void generatePuzzle(ArrayList<String> words){
+		// TODO should fill in remaining cells with random chars after all words have been added
 		//sort words by descending length
 		ArrayList<String> wordsInOrder = new ArrayList<String>();
 		while(!words.isEmpty()) {
@@ -198,20 +199,14 @@ public class Board extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
@@ -233,7 +228,6 @@ public class Board extends JPanel {
 	}
 
 	public String getWordAt(Point start, Point end) {
-		// TODO this only works left to right, needs to be fixed
 		String word = "";
         // vertical word downwards
         if (start.x == end.x && start.y < end.y) {
