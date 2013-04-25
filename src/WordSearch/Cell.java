@@ -22,7 +22,7 @@ public class Cell {
 	public Cell(int row, int column) {
 		this.row = row;
 		this.column = column;
-		//letter = 'K';
+		letter = ' ';
 	}
 
 

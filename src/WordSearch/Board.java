@@ -1,6 +1,7 @@
 package WordSearch;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -46,74 +47,129 @@ public class Board extends JPanel {
 			words.remove(index);
 		}
 		
-		//randomly place first word and then remove from wordsInOrder
-		Random rand = new Random();
-		boolean forward = true;
-		if(rand.nextInt(1) == 0)
-			forward = false;
-		
-		int row = 0;
-		int column = 0;
-		int direction = rand.nextInt(4);
-		String toInsert = wordsInOrder.get(0);
-		if(!forward)
-			toInsert = new StringBuffer(toInsert).reverse().toString();
-		
-		switch(direction) {	
-		//horizontal
-		case 0: 
-			row = rand.nextInt(rows);
-			column = rand.nextInt(columns - wordsInOrder.get(0).length());
-			for(int i = 0; i < toInsert.length(); i++) {
-				getCellAt(row, column + i).setLetter(toInsert.charAt(i));
-			}
-			break;
-		//vertical
-		case 1:
-			row = rand.nextInt(rows - wordsInOrder.get(0).length());
-			column = rand.nextInt(columns);
-			for(int i = 0; i < toInsert.length(); i++) {
-				getCellAt(row + i, column).setLetter(toInsert.charAt(i));
-			}
-			break;
-		// / diagonal
-		case 2:
-			row = rand.nextInt(rows - wordsInOrder.get(0).length()) + wordsInOrder.get(0).length();
-			column = rand.nextInt(columns - wordsInOrder.get(0).length());
-			for(int i = 0; i < toInsert.length(); i++) {
-				getCellAt(row - i, column + i).setLetter(toInsert.charAt(i));
-			}
-			break;
-		// \ diagonal
-		case 3:
-			row = rand.nextInt(rows - wordsInOrder.get(0).length());
-			column = rand.nextInt(columns - wordsInOrder.get(0).length());
-			for(int i = 0; i < toInsert.length(); i++) {
-				getCellAt(row + i, column + i).setLetter(toInsert.charAt(i));
-			}
-			break;
-		default:
-			break;
-		}
-		
-		wordsInOrder.remove(0);
-		
 		//insert each word in order
 		for(String s : wordsInOrder)
-			insertWord(s);
+			insertWord(s, 0);
+		
+		//TODO fill remaining cells with random characters
 	}
 	
-	public void insertWord(String word) {
-		/*Sort all the words by length, descending.
-		Take the first word and place it on the board.
+	public boolean checkValidLocation(Point start, Point end, String toPlace){
+		 // vertical word
+        if (start.x == end.x) {
+            for (int i = start.y; i < end.y; ++i) {
+                if(getCellAt(i, start.x).getLetter() != ' ' && !Character.toString(getCellAt(i, start.x).getLetter()).equalsIgnoreCase(Character.toString(toPlace.charAt(i - start.y)))) {
+                	return false;
+                }
+            }
+        }
+        // horizontal word
+        else if (start.y == end.y) {
+            for (int i = start.x; i < end.x; ++i) {
+            	if(getCellAt(start.y, i).getLetter() != ' ' && !Character.toString(getCellAt(start.y, i).getLetter()).equalsIgnoreCase(Character.toString(toPlace.charAt(i - start.x)))) {
+            		return false;
+            }
+            }
+        }
+        // / diagonal word
+        else if (start.x + start.y == end.x + end.y) {
+            for (int i = 0; i < (end.x - start.x); ++i) {
+            	if(getCellAt(start.y - i, start.x + i).getLetter() != ' ' && !Character.toString(getCellAt(start.y - i, start.x + i).getLetter()).equalsIgnoreCase(Character.toString(toPlace.charAt(i))))
+                	return false;
+            }
+        }
+        // \ diagonal
+        else if (end.x - start.x == end.y - start.y) {
+            for (int i = 0; i < (end.x - start.x); ++i) {
+            	if(getCellAt(start.y + i, start.x + i).getLetter() != ' ' && !Character.toString(getCellAt(start.y + i, start.x + i).getLetter()).equalsIgnoreCase(Character.toString(toPlace.charAt(i))))
+                	return false;
+            }
+        }
+        return true;
+	}
+	
+	public void insertWord(String word, int timesTried) {
+		/*
 		Take the next word.
 		Search through all the words that are already on the board and see if there are any possible intersections (any common letters) with this word.
 		If there is a possible location for this word, loop through all the words that are on the board and check to see if the new word interferes.
 		If this word doesn't break the board, then place it there and go to step 3, otherwise, continue searching for a place (step 4).
 		Continue this loop until all the words are either placed or unable to be placed.*/
 		// TODO implement function
-		for (int i = 0; i < word.length(); ++i) {
+		/*for (int i = 0; i < word.length(); ++i) {
 			cells[0][i].setLetter(word.charAt(i));
+		}*/
+		if(timesTried < 400) {
+			Random rand = new Random();
+			boolean forward = true;
+			if(rand.nextInt(2) == 0)
+				forward = false;
+
+			int row = 0;
+			int column = 0;
+			int direction = rand.nextInt(4);
+			if(!forward)
+				word = new StringBuffer(word).reverse().toString();
+
+			switch(direction) {	
+			//horizontal
+			case 0: 
+				row = rand.nextInt(rows);
+				column = rand.nextInt(columns - word.length());
+				if(checkValidLocation(new Point(column, row), new Point(column + word.length(), row), word)) {
+					for(int i = 0; i < word.length(); i++) {
+						getCellAt(row, column + i).setLetter(word.charAt(i));
+					}
+				}
+				else {
+					insertWord(word, timesTried++);
+				}
+				break;
+				//vertical
+			case 1:
+				row = rand.nextInt(rows - word.length());
+				column = rand.nextInt(columns);
+				if(checkValidLocation(new Point(column, row), new Point(column, row + word.length()), word)) {
+					for(int i = 0; i < word.length(); i++) {
+						getCellAt(row + i, column).setLetter(word.charAt(i));
+					}
+				}
+				else {
+					insertWord(word, timesTried++);
+				}
+				break;
+				// / diagonal
+			case 2:
+				row = rand.nextInt(rows - word.length()) + word.length();
+				column = rand.nextInt(columns - word.length());
+				if(checkValidLocation(new Point(column, row), new Point(column + word.length(), row - word.length()), word)) {
+					for(int i = 0; i < word.length(); i++) {
+						getCellAt(row - i, column + i).setLetter(word.charAt(i));
+					}
+				}
+				else {
+					insertWord(word, timesTried++);
+				}
+				break;
+				// \ diagonal
+			case 3:
+				row = rand.nextInt(rows - word.length());
+				column = rand.nextInt(columns - word.length());
+				if(checkValidLocation(new Point(column, row), new Point(column + word.length(), row + word.length()), word)) {
+					for(int i = 0; i < word.length(); i++) {
+						getCellAt(row + i, column + i).setLetter(word.charAt(i));
+					}
+				}
+				else {
+					insertWord(word, timesTried++);
+				}
+				break;
+			default:
+				break;
+			}
+		}
+		else {
+			Game.currentGame.getWordBank().removeWord(word);
 		}
 	}
 	
@@ -145,13 +201,13 @@ public class Board extends JPanel {
 		return cells[row][column];
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setSize(new Dimension(800,815));
 		Board board = new Board(25, 25, new ArrayList<String>());
 		frame.add(board);
 		frame.setVisible(true);
-	}
+	}*/
 	
 	public void highlight(int row, int col) {
 		cells[row][col].highlight();

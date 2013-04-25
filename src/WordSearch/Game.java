@@ -37,6 +37,7 @@ public class Game extends JFrame{
 	private JMenuItem play, exit;
 	
 	public Game() {
+		currentGame = this;
 		//initialize frame
 		setSize(700, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +61,7 @@ public class Game extends JFrame{
 		//create splash screen and get player name and category file
 		splashScreen = new SplashScreen(getListOfFiles("SecretFiles", ".txt", true));
 
-		currentGame = this;
+		
 	}
 	
 	private class fileListener implements ActionListener {
@@ -84,11 +85,12 @@ public class Game extends JFrame{
 		playerName = splashScreen.getPlayerName();
 		ArrayList<String> words = getListOfLinesFromFile("SecretFiles", file);
 		wordsLeft = words.size();
+		wordBank = new WordBank(words);
+		this.add(wordBank, BorderLayout.EAST);
 		board = new Board(20, 20, words);
 		this.add(board, BorderLayout.CENTER);
 		
-		wordBank = new WordBank(words);
-		this.add(wordBank, BorderLayout.EAST);
+		
 		
 		this.setVisible(true);
 	}
@@ -131,13 +133,13 @@ public class Game extends JFrame{
 	public void highlightWords(Point start, Point end) {
         // vertical word
         if (start.x == end.x) {
-            for (int i = start.x; i <= end.x; ++i) {
+            for (int i = start.y; i <= end.y; ++i) {
                 board.highlight(start.y, i);
             }
         }
         // horizontal word
         else if (start.y == end.y) {
-            for (int i = start.y; i <= end.y; ++i) {
+            for (int i = start.x; i <= end.x; ++i) {
                 board.highlight(i, start.x);
             }
         }

@@ -140,7 +140,7 @@ public class WordSearchTests {
 		Board testBoard = new Board(20, 20, new ArrayList<String>());
 		String inserted = "Kohlrabi";
 		Map<Character, Boolean> found = new HashMap<Character, Boolean>();
-		testBoard.insertWord(inserted);
+		testBoard.insertWord(inserted, 0);
 		
 		for(int i = 0; i < inserted.length(); i++) {
 			found.put(inserted.charAt(i), false);

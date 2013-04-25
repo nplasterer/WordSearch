@@ -60,5 +60,8 @@ public class WordBank extends JPanel{
 		return new ArrayList<String>(wordBank.keySet());
 	}
 	
+	public void removeWord(String word) {
+		wordBank.get(word).setVisible(false);
+	}
 
 }
