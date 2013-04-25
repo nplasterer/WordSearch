@@ -238,9 +238,15 @@ public class Board extends JPanel {
 	public String getWordAt(Point start, Point end) {
 		// TODO this only works left to right, needs to be fixed
 		String word = "";
-        // vertical word
-        if (start.x == end.x) {
+        // vertical word downwards
+        if (start.x == end.x && start.y < end.y) {
             for (int i = start.y; i <= end.y; ++i) {
+                word = word + cells[i][start.x].getLetter();
+            }
+        }
+        // vertical word upwards
+        else if (start.x == end.x && start.y > end.y) {
+            for (int i = start.y; i >= end.y; --i) {
                 word = word + cells[i][start.x].getLetter();
             }
         }

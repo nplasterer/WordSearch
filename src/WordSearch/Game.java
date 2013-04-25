@@ -143,9 +143,15 @@ public class Game extends JFrame{
 	}
 	
 	public void highlightWords(Point start, Point end) {
-        // vertical word
-        if (start.x == end.x) {
+        // vertical word downwards
+        if (start.x == end.x && start.y < end.y) {
             for (int i = start.y; i <= end.y; ++i) {
+                board.highlight(i, start.x);
+            }
+        }
+        // vertical word upwards
+        if (start.x == end.x && start.y > end.y) {
+            for (int i = start.y; i >= end.y; --i) {
                 board.highlight(i, start.x);
             }
         }
