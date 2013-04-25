@@ -116,15 +116,5 @@ public class SplashScreen extends JDialog {
 	public void click() {
 		okButton.doClick();
 	}
-	
-	
-	public static void main(String[] args) {
-		Game game = new Game();
-		ArrayList<String> words = new ArrayList<String>();
-		words.add("Brandon");
-		words.add("Dylon");
-		words.add("Clayton");
-		SplashScreen screen = new SplashScreen(words);
-		screen.setVisible(true);
-	}
+
 }

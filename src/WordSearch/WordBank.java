@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  * @author Naomi Plasterer, Brandon Bosso, Jason Steinberg, Austin Diviness
  */
 
-public class WordBank extends JFrame{
+public class WordBank extends JPanel{
 	private Map<String, JCheckBox> wordBank;
 	
 	public WordBank(ArrayList<String> words) {
@@ -39,7 +39,6 @@ public class WordBank extends JFrame{
 			    }
 			    });
 			wordBank.put(s, box);
-			System.out.println(s);
 			add(box);
 		}
 	}
@@ -56,13 +55,14 @@ public class WordBank extends JFrame{
 	public Map<String, JCheckBox> getWordBank() {
 		return wordBank;
 	}
-	
+
 	public ArrayList<String> getWords() {
 		return new ArrayList<String>(wordBank.keySet());
 	}
 	
 	public void removeWord(String word) {
 		remove(wordBank.get(word));
+		Game.currentGame.decreaseWordsLeft();
 	}
 	
 

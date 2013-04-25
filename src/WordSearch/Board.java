@@ -218,9 +218,7 @@ public class Board extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				int x = arg0.getX() / Cell.getWidth();
 				int y = arg0.getY() / Cell.getWidth();
-				mousePress = new Point(x, y);
-				System.out.println(mousePress.toString());
-				
+				mousePress = new Point(x, y);				
 			}
 
 			@Override
@@ -228,7 +226,6 @@ public class Board extends JPanel {
 				int x = arg0.getX() / Cell.getWidth();
 				int y = arg0.getY() / Cell.getWidth();
 				mouseRelease = new Point(x, y);
-				System.out.println(mouseRelease.toString());
 				Game.currentGame.runWord();
 			}
 			

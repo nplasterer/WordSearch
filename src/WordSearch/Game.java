@@ -109,14 +109,23 @@ public class Game extends JFrame{
 	
 	
 	public boolean checkIfDone(){
-		if(wordsLeft == 0)
+		if(wordsLeft == 0) {
+			showWinScreen();
 			return true;
+		}
 		else	
 			return false;
 	}
 	
 	public void showWinScreen(){
-		// TODO implement function
+		int reply = JOptionPane.showConfirmDialog(null, "Congratulations " + playerName + ", you win! Would you like to play again?", "Please choose an option", JOptionPane.YES_NO_OPTION);
+		if(reply == JOptionPane.YES_OPTION) {
+			dispose();
+			startNewGame();
+		}
+		else {
+			System.exit(0);
+		}
 	}
 	
 	public boolean checkValidWord(String word){
@@ -306,14 +315,23 @@ public class Game extends JFrame{
 		String word;
 		if (checkValidSelection(start, end)) {
 			word = board.getWordAt(start, end);
-			System.out.println(word);
 			if (checkValidWord(word)) {
-				System.out.println("valid");
 				this.highlightWords(start, end);
 				wordBank.checkBox(word);
 				--wordsLeft;
+				checkIfDone();
+			}
+			else if(checkValidWord(new StringBuffer(word).reverse().toString())) {
+				this.highlightWords(start, end);
+				wordBank.checkBox(new StringBuffer(word).reverse().toString());
+				--wordsLeft;
+				checkIfDone();
 			}
 		}
+	}
+	
+	public void decreaseWordsLeft() {
+		wordsLeft--;
 	}
 	
 	
