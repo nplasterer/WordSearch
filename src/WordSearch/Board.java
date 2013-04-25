@@ -250,16 +250,28 @@ public class Board extends JPanel {
                 word = word + cells[i][start.x].getLetter();
             }
         }
-        // horizontal word
-        else if (start.y == end.y) {
+        // horizontal word left->right
+        else if (start.y == end.y && start.x < end.x) {
             for (int i = start.x; i <= end.x; ++i) {
                 word = word + cells[start.y][i].getLetter();
             }
         }
-        // / diagonal word
-        else if (start.x + start.y == end.x + end.y) {
-            for (int i = 0; i <= (end.x - start.x); ++i) {
+        // horizontal word right->left
+        else if (start.y == end.y && start.x > end.x) {
+            for (int i = start.x; i >= end.x; --i) {
+                word = word + cells[start.y][i].getLetter();
+            }
+        }
+        // / diagonal word upper right to lower left
+        else if (start.x + start.y == end.x + end.y && start.x > end.x) {
+            for (int i = 0; i <= (start.x - end.x); ++i) {
                 word = word + cells[start.y + i][start.x - i].getLetter();
+            }
+        }
+        // / diagonal word lower left to upper right
+        else if (start.x + start.y == end.x + end.y && start.x < end.x) {
+            for (int i = 0; i <= (end.x - start.x); ++i) {
+                word = word + cells[start.y - i][start.x + i].getLetter();
             }
         }
         // \ diagonal

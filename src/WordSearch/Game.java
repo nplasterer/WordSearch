@@ -155,16 +155,28 @@ public class Game extends JFrame{
                 board.highlight(i, start.x);
             }
         }
-        // horizontal word
-        else if (start.y == end.y) {
+        // horizontal word left->right
+        else if (start.y == end.y && start.x < end.x) {
             for (int i = start.x; i <= end.x; ++i) {
                 board.highlight(start.y, i);
             }
         }
-        // / diagonal word
-        else if (start.x + start.y == end.x + end.y) {
-            for (int i = 0; i <= (end.x - start.x); ++i) {
+        // horizontal word right->left
+        else if (start.y == end.y && start.x > end.x) {
+            for (int i = start.x; i >= end.x; --i) {
+                board.highlight(start.y, i);
+            }
+        }
+        // / diagonal word upper right to lower left
+        else if (start.x + start.y == end.x + end.y && start.x > end.x) {
+            for (int i = 0; i <= (start.x - end.x); ++i) {
                 board.highlight(start.y + i, start.x - i);
+            }
+        }
+        // / diagonal word lower left to upper right
+        else if (start.x + start.y == end.x + end.y && start.x < end.x) {
+            for (int i = 0; i <= (end.x - start.x); ++i) {
+                board.highlight(start.y - i, start.x + i);
             }
         }
         // \ diagonal
