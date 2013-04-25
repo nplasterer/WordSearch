@@ -274,10 +274,16 @@ public class Board extends JPanel {
                 word = word + cells[start.y - i][start.x + i].getLetter();
             }
         }
-        // \ diagonal
-        else if (end.x - start.x == end.y - start.y) {
+        // \ diagonal upper left to lower right
+        else if (end.x - start.x == end.y - start.y && start.x < end.x) {
             for (int i = 0; i <= (end.x - start.x); ++i) {
-                word = word + cells[start.x + i][start.x + i].getLetter();
+                word = word + cells[start.y + i][start.x + i].getLetter();
+            }
+        }
+        // \ diagonal lower right to upper left
+        else if (end.x - start.x == end.y - start.y && start.x > end.x) {
+            for (int i = 0; i <= (start.x - end.x); ++i) {
+                word = word + cells[start.y - i][start.x - i].getLetter();
             }
         }
         return word;

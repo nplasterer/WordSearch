@@ -179,10 +179,16 @@ public class Game extends JFrame{
                 board.highlight(start.y - i, start.x + i);
             }
         }
-        // \ diagonal
-        else if (end.x - start.x == end.y - start.y) {
+        // \ diagonal upper left to lower right
+        else if (end.x - start.x == end.y - start.y && start.x < end.x) {
             for (int i = 0; i <= (end.x - start.x); ++i) {
-                board.highlight(start.x + i, start.x + i);
+                board.highlight(start.y + i, start.x + i);
+            }
+        }
+        // \ diagonal lower right to upper left
+        else if (end.x - start.x == end.y - start.y && start.x > end.x) {
+            for (int i = 0; i <= (start.x - end.x); ++i) {
+                board.highlight(start.y - i, start.x - i);
             }
         }
         board.repaint();
