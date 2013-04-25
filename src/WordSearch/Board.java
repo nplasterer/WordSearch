@@ -51,7 +51,17 @@ public class Board extends JPanel {
 		for(String s : wordsInOrder)
 			insertWord(s, 0);
 		
-		//TODO fill remaining cells with random characters
+		/*Random random = new Random();
+		String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		char letter = ' ';
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < columns; j++) {
+				if(getCellAt(i,j).getLetter() == ' ') {
+					letter = alphabet.charAt(random.nextInt(alphabet.length()));
+					getCellAt(i,j).setLetter(letter);
+				}
+			}
+		}*/
 	}
 	
 	public boolean checkValidLocation(Point start, Point end, String toPlace){
@@ -89,16 +99,6 @@ public class Board extends JPanel {
 	}
 	
 	public void insertWord(String word, int timesTried) {
-		/*
-		Take the next word.
-		Search through all the words that are already on the board and see if there are any possible intersections (any common letters) with this word.
-		If there is a possible location for this word, loop through all the words that are on the board and check to see if the new word interferes.
-		If this word doesn't break the board, then place it there and go to step 3, otherwise, continue searching for a place (step 4).
-		Continue this loop until all the words are either placed or unable to be placed.*/
-		// TODO implement function
-		/*for (int i = 0; i < word.length(); ++i) {
-			cells[0][i].setLetter(word.charAt(i));
-		}*/
 		if(timesTried < 400) {
 			Random rand = new Random();
 			boolean forward = true;
@@ -125,7 +125,7 @@ public class Board extends JPanel {
 					insertWord(word, timesTried++);
 				}
 				break;
-				//vertical
+			//vertical
 			case 1:
 				row = rand.nextInt(rows - word.length());
 				column = rand.nextInt(columns);
@@ -138,7 +138,7 @@ public class Board extends JPanel {
 					insertWord(word, timesTried++);
 				}
 				break;
-				// / diagonal
+			// / diagonal
 			case 2:
 				row = rand.nextInt(rows - word.length()) + word.length();
 				column = rand.nextInt(columns - word.length());
@@ -151,7 +151,7 @@ public class Board extends JPanel {
 					insertWord(word, timesTried++);
 				}
 				break;
-				// \ diagonal
+			// \ diagonal
 			case 3:
 				row = rand.nextInt(rows - word.length());
 				column = rand.nextInt(columns - word.length());
