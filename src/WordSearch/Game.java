@@ -341,15 +341,27 @@ public class Game extends JFrame{
 		Point end = board.getMouseRelease();
 		String word;
 		if (checkValidSelection(start, end)) {
+			
+			//check forwards
 			word = board.getWordAt(start, end);
+			String backwords = "";
 			String toCheck = "";
 			for(int i = 0; i < word.length(); i++) {
-				if(i == 0)
+				if(i == 0) {
 					toCheck += Character.toUpperCase(word.charAt(i));
-				else
+					backwords += Character.toLowerCase(word.charAt(i));
+				}
+				else if(i == word.length() - 1) {
+					backwords += Character.toUpperCase(word.charAt(i));
 					toCheck += Character.toLowerCase(word.charAt(i));
+				}
+				else {
+					toCheck += Character.toLowerCase(word.charAt(i));
+					backwords += Character.toLowerCase(word.charAt(i));
+				}
 			}
 			word = toCheck;
+
 			if (checkValidWord(word)) {	
 				if(wordBank.contains(word) && !wordBank.getWordBank().get(word).isSelected()) {
 					wordBank.checkBox(word);
@@ -357,17 +369,18 @@ public class Game extends JFrame{
 					this.highlightWords(start, end);
 				}
 			}
-			else if(wordBank.contains(new StringBuffer(word).reverse().toString()) && checkValidWord(new StringBuffer(word).reverse().toString())) {
-				if(!wordBank.getWordBank().get(new StringBuffer(word).reverse().toString()).isSelected()) {
+			
+			//check backwords
+			else if(wordBank.contains(new StringBuffer(backwords).reverse().toString()) && checkValidWord(new StringBuffer(backwords).reverse().toString())) {
+				if(!wordBank.getWordBank().get(new StringBuffer(backwords).reverse().toString()).isSelected()) {
 					this.highlightWords(start, end);
-					wordBank.checkBox(new StringBuffer(word).reverse().toString());
+					wordBank.checkBox(new StringBuffer(backwords).reverse().toString());
 					--wordsLeft;
 				}
 			}
 			
-			if (checkIfDone()) {
+			if (checkIfDone())
 				showWinScreen();
-			}
 		}
 	}
 	
