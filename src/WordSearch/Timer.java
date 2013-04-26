@@ -1,26 +1,42 @@
 package WordSearch;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.TimerTask;
+
 
 public class Timer extends TimerTask {
 	private long elapsedTime;
 	private boolean running;
-	/*
-	private long startTime;
-	
-	public boolean running;
-	*/
+	private static javax.swing.Timer ttimer;
+
 	public Timer() {
 		elapsedTime = 0;
 		running = false;
+		ttimer = new javax.swing.Timer(1000, new TimerListener());
+		
 	}
-	/*
+	
+	private class TimerListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			run();
+			
+		}
+		
+	}
+	
 	public void startTime() {
-		System.out.println("Start");
 		running = true;
-		startTime = System.currentTimeMillis();
+		ttimer.start();
 	}
-	*/
+	
+	public void stopTime() {
+		running = false;
+		ttimer.stop();
+	}
+
 	public void pauseTime() {
 		running = !running;
 	}
@@ -28,21 +44,8 @@ public class Timer extends TimerTask {
 	public void resetTime() {
 		elapsedTime = 0;
 	}
-	/*
-	public void stopTime() {
-		System.out.println("Stop");
-		elapsedTime += System.currentTimeMillis() - startTime;
-		running = false;
-	}
-	
 
-	*/
 	public String getTime() {
-		/*long totalTime = (elapsedTime + (System.currentTimeMillis() - startTime));
-		int minutes = (int) (totalTime/60000);
-		totalTime -= totalTime/60000;
-		int seconds = (int) (totalTime/1000);
-		totalTime -= totalTime/1000;*/
 		int minutes = (int) (elapsedTime / 60);
 		int second = (int) (elapsedTime - (minutes * 60));
 		String str;

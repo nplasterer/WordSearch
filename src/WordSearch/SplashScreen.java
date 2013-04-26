@@ -93,8 +93,7 @@ public class SplashScreen extends JDialog {
 				setVisible(false);
 				Game.currentGame.loadConfigFile(categories.getSelectedItem() + ".txt");
 				Game.currentGame.setDisplayTime();
-				Game.currentGame.getTimer().pauseTime();
-				Game.currentGame.getTTimer().start();
+				Game.currentGame.getTimer().startTime();
 			}
 			//otherwise give error message
 			else {

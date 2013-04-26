@@ -40,19 +40,19 @@ public class Game extends JFrame{
 	private JMenu file;
 	private JMenuItem play, exit, newGame;
 	private JLabel timeDisplay;
-	javax.swing.Timer ttimer;
 	
 	public Game() {
 		currentGame = this;
 		//initialize frame
 		setSize(700, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("WordSearch: The Bestest Ever");
 		
 		//initialize variables
 		start = null;
 		end = null;
 		timer = new Timer();
-		ttimer = new javax.swing.Timer(1000, new TimerListener());
+
 		
 		//create JMenuBar
 		menu = new JMenuBar();
@@ -78,15 +78,7 @@ public class Game extends JFrame{
 		
 	}
 	
-	private class TimerListener implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			Game.currentGame.getTimer().run();
-			
-		}
-		
-	}
 	
 	private class fileListener implements ActionListener {
 
@@ -147,7 +139,7 @@ public class Game extends JFrame{
 	}
 	
 	public void showWinScreen(){
-		ttimer.stop();
+		timer.stopTime();
 		int reply = JOptionPane.showConfirmDialog(null, "Congratulations " + playerName + ", you win! Your time was " + timer.getTime() + System.getProperty("line.separator") + "Would you like to play again?", "Please choose an option", JOptionPane.YES_NO_OPTION);
 		if(reply == JOptionPane.YES_OPTION) {
 			dispose();
@@ -350,14 +342,22 @@ public class Game extends JFrame{
 		String word;
 		if (checkValidSelection(start, end)) {
 			word = board.getWordAt(start, end);
+			String toCheck = "";
+			for(int i = 0; i < word.length(); i++) {
+				if(i == 0)
+					toCheck += Character.toUpperCase(word.charAt(i));
+				else
+					toCheck += Character.toLowerCase(word.charAt(i));
+			}
+			word = toCheck;
 			if (checkValidWord(word)) {	
-				if(!wordBank.getWordBank().get(word).isSelected()) {
+				if(wordBank.contains(word) && !wordBank.getWordBank().get(word).isSelected()) {
 					wordBank.checkBox(word);
 					--wordsLeft;
 					this.highlightWords(start, end);
 				}
 			}
-			else if(checkValidWord(new StringBuffer(word).reverse().toString())) {
+			else if(wordBank.contains(new StringBuffer(word).reverse().toString()) && checkValidWord(new StringBuffer(word).reverse().toString())) {
 				if(!wordBank.getWordBank().get(new StringBuffer(word).reverse().toString()).isSelected()) {
 					this.highlightWords(start, end);
 					wordBank.checkBox(new StringBuffer(word).reverse().toString());
@@ -382,10 +382,7 @@ public class Game extends JFrame{
 	public void setDisplayTime() {
 		timeDisplay.setText(timer.getTime());
 	}
-	
-	public javax.swing.Timer getTTimer() {
-		return ttimer;
-	}
+
 	
 	
 	public static void main(String[] args) {
