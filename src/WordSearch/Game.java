@@ -73,8 +73,8 @@ public class Game extends JFrame{
 		setJMenuBar(menu);
 		
 		//create splash screen and get player name and category file
-		splashScreen = new SplashScreen(getListOfFiles("SecretFiles", ".txt", true));
-
+		splashScreen = new SplashScreen(FileUtilities.getListOfFiles("SecretFiles", ".txt", true));
+		
 		
 	}
 	
@@ -109,7 +109,7 @@ public class Game extends JFrame{
 	
 	public void loadConfigFile(String file){
 		playerName = splashScreen.getPlayerName();
-		ArrayList<String> words = getListOfLinesFromFile("SecretFiles", file);
+		ArrayList<String> words = FileUtilities.getListOfLinesFromFile("SecretFiles", file);
 		ArrayList<String> toAdd = new ArrayList<String>();
 		for(String s : words) {
 			String add = "";
@@ -140,6 +140,7 @@ public class Game extends JFrame{
 	
 	public void showWinScreen(){
 		timer.stopTime();
+		/*
 		int reply = JOptionPane.showConfirmDialog(null, "Congratulations " + playerName + ", you win! Your time was " + timer.getTime() + System.getProperty("line.separator") + "Would you like to play again?", "Please choose an option", JOptionPane.YES_NO_OPTION);
 		if(reply == JOptionPane.YES_OPTION) {
 			dispose();
@@ -147,7 +148,12 @@ public class Game extends JFrame{
 		}
 		else {
 			System.exit(0);
-		}
+		}*/
+		setCategory(splashScreen.getCategory());
+		System.out.println(getCategory());
+		WinScreen screen = new WinScreen(playerName, timer.getTime(), getCategory().toLowerCase()); //"automorewdfbiles" );
+		
+		screen.setVisible(true);
 	}
 	
 	public boolean checkValidWord(String word){
@@ -254,73 +260,6 @@ public class Game extends JFrame{
 	
 	public Board getBoard() {
 		return board;
-	}
-	
-	public String getDataDirectoryFullPath(String dataDirectory) throws IOException {
-		String currentPath = new java.io.File(".").getCanonicalPath(); // Get current path
-		return currentPath + File.separatorChar + dataDirectory;  // Add on name of data directory
-	}
-	
-	public ArrayList<String> getListOfLinesFromFile(String dataDirectory, String inputFile) {
-		FileReader fileReader = null;
-		String dataPath = "";
-		ArrayList<String> result = new ArrayList<String>();
-		
-		try {
-			dataPath =  getDataDirectoryFullPath(dataDirectory);
-			
-			fileReader = new FileReader(dataPath + File.separatorChar + inputFile);
-		} 	catch (FileNotFoundException e) {
-			System.out.println("Unable to load file: " + dataPath + File.separatorChar + inputFile);
-			System.exit(1);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("Unable to get path: " + dataPath + File.separatorChar + inputFile);
-			System.exit(1);
-		}
-
-		Scanner in = new Scanner(fileReader);
-		
-		String line = " ";
-		while (in.hasNext()) {
-			line = in.nextLine();
-			result.add(line);			
-		}
-		
-		return result;		
-	}
-	
-	public ArrayList<String> getListOfFiles(String dataDirectory, String onlyLookAtExtension, boolean removeExtension) {		
-		ArrayList<String> results = new ArrayList<String>();
-		String dataPath = "";
-				
-		try {
-			dataPath = getDataDirectoryFullPath(dataDirectory); // Get data path
-
-			// This snippet was inspired by Sean Kleinjung and follows 
-			//  closely to his code, with some code added to see if the user wanted an extension.
-			//  From http://stackoverflow.com/questions/5694385/getting-the-filenames-of-all-files-in-a-folder
-			File[] files = new File(dataPath).listFiles();
-
-			for (File file : files) {
-			    if (file.isFile()) {
-			    	if (removeExtension && onlyLookAtExtension != "") { 
-			    		if (file.getName().substring(file.getName().lastIndexOf(onlyLookAtExtension)).equalsIgnoreCase(onlyLookAtExtension)) {
-			    			results.add(file.getName().substring(0,file.getName().lastIndexOf(onlyLookAtExtension)));
-			    		}
-			    	} else {
-			    		results.add(file.getName());
-			    	}
-			    }
-			}
-			//End snippet
-			return results;			
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("Unable to find path.");
-			System.exit(2);
-		}
-		return null;
 	}
 	
 	public void setPlayerName(String name) {

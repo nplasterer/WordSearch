@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import WordSearch.Board;
 import WordSearch.Cell;
+import WordSearch.FileUtilities;
 import WordSearch.Game;
 import WordSearch.SplashScreen;
 import WordSearch.WordBank;
@@ -45,14 +46,14 @@ public class WordSearchTests {
 	@Test
 	public void testLoadingWords() {
 		ArrayList<String> words = new ArrayList<String>();
-		words = testGame.getListOfLinesFromFile("SecretFiles", "Cats.txt");
+		words = FileUtilities.getListOfLinesFromFile("SecretFiles", "Cats.txt");
 		assertEquals(15, words.size());
 		assertTrue(words.contains("Calico"));
 		assertTrue(words.contains("Siamese"));
 		assertTrue(words.contains("Bengal"));
 		assertTrue(words.contains("Toyger"));
 		
-		words = testGame.getListOfLinesFromFile("SecretFiles", "Automobiles.txt");
+		words = FileUtilities.getListOfLinesFromFile("SecretFiles", "Automobiles.txt");
 		assertEquals(11, words.size());
 		assertTrue(words.contains("Dodge"));
 		assertTrue(words.contains("Mitsubishi"));
@@ -67,8 +68,8 @@ public class WordSearchTests {
 	@Test
 	public void testLoadFileNames() {
 		ArrayList<String> files = new ArrayList<String>();
-		files = testGame.getListOfFiles("SecretFiles", ".txt", true);
-		assertEquals(2, files.size());
+		files = FileUtilities.getListOfFiles("SecretFiles", ".txt", true);
+		assertTrue(2 < files.size());
 		assertTrue(files.contains("Cats"));
 		assertTrue(files.contains("Automobiles"));
 	}
@@ -121,7 +122,7 @@ public class WordSearchTests {
 	 */
 	@Test
 	public void testValidWord() {
-		testGame.setWordBank(new WordBank(testGame.getListOfLinesFromFile("SecretFiles", "Cats.txt")));
+		testGame.setWordBank(new WordBank(FileUtilities.getListOfLinesFromFile("SecretFiles", "Cats.txt")));
 		assertTrue(testGame.checkValidWord("Calico"));
 		assertTrue(testGame.checkValidWord("Bengal"));
 		assertTrue(testGame.checkValidWord("Highlander"));
@@ -176,7 +177,7 @@ public class WordSearchTests {
 	 */
 	@Test
 	public void testWordBank() {
-		ArrayList<String> words = testGame.getListOfLinesFromFile("SecretFiles", "Cats.txt");
+		ArrayList<String> words = FileUtilities.getListOfLinesFromFile("SecretFiles", "Cats.txt");
 		WordBank bank = new WordBank(words);
 		bank.checkBox("Calico");
 		bank.checkBox("Siamese");
