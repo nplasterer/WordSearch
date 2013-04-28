@@ -65,7 +65,11 @@ public class HighScore extends JDialog {
 	//find top five scores and add to panel
 	public void sortScores() {
 		JPanel scorePanel = new JPanel();
-		scorePanel.setLayout(new GridLayout(5,1));
+		JPanel namePanel = new JPanel();
+		JPanel timePanel = new JPanel();
+		scorePanel.setLayout(new GridLayout(1,2));
+		namePanel.setLayout(new GridLayout(5,1));
+		timePanel.setLayout(new GridLayout(5,1));
 		
 		String name;
 		String timeDisplay;
@@ -94,9 +98,15 @@ public class HighScore extends JDialog {
 				str = "0" + second;
 			timeDisplay = minutes + ":" + str  + "   ";
 			
-			JLabel scoreLabel = new JLabel(name + " ----------------------------------------------------------------------------------------------------------------------- " + timeDisplay);
-			scorePanel.add(scoreLabel);
+			JLabel nameLabel = new JLabel(name);
+			nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			JLabel timeLabel = new JLabel(timeDisplay);
+			timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			namePanel.add(nameLabel);
+			timePanel.add(timeLabel);
 		}
+		scorePanel.add(namePanel);
+		scorePanel.add(timePanel);
 		add(scorePanel, BorderLayout.CENTER);
 	}
 	
