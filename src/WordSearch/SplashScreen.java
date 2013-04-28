@@ -91,6 +91,7 @@ public class SplashScreen extends JDialog {
 			//if player has entered name, set name and category
 			if(name.length() != 0) {
 				setVisible(false);
+				Game.currentGame.setCategory((String) categories.getSelectedItem());
 				Game.currentGame.loadConfigFile(categories.getSelectedItem() + ".txt");
 				Game.currentGame.setDisplayTime();
 				Game.currentGame.getTimer().startTime();

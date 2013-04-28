@@ -4,12 +4,10 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
@@ -38,7 +36,7 @@ public class Game extends JFrame{
 	private SplashScreen splashScreen;
 	private JMenuBar menu;
 	private JMenu file;
-	private JMenuItem play, exit, newGame;
+	private JMenuItem play, exit, newGame, highScores;
 	private JLabel timeDisplay;
 	
 	public Game() {
@@ -61,11 +59,14 @@ public class Game extends JFrame{
 		play = new JMenuItem("Play/Pause");
 		exit = new JMenuItem("Exit");
 		newGame = new JMenuItem("New Game");
+		highScores = new JMenuItem("High Scores");
+		highScores.addActionListener(new fileListener());
 		newGame.addActionListener(new fileListener());
 		play.addActionListener(new fileListener());
 		exit.addActionListener(new fileListener());
 		file.add(play);
 		file.add(newGame);
+		file.add(highScores);
 		file.add(exit);
 		menu.add(file);
 		menu.add(Box.createHorizontalGlue());
@@ -99,6 +100,12 @@ public class Game extends JFrame{
 					dispose();
 					startNewGame();
 				}
+			}
+			else if(e.getSource() == highScores) {
+				timer.stopTime();
+				board.setVisible(false);
+				HighScore scores = new HighScore(category);
+				scores.setVisible(true);
 			}
 			else if(e.getSource() == exit) 
 				System.exit(0);
@@ -140,20 +147,38 @@ public class Game extends JFrame{
 	
 	public void showWinScreen(){
 		timer.stopTime();
-		/*
-		int reply = JOptionPane.showConfirmDialog(null, "Congratulations " + playerName + ", you win! Your time was " + timer.getTime() + System.getProperty("line.separator") + "Would you like to play again?", "Please choose an option", JOptionPane.YES_NO_OPTION);
-		if(reply == JOptionPane.YES_OPTION) {
-			dispose();
-			startNewGame();
-		}
-		else {
-			System.exit(0);
-		}*/
+		writeScore();
 		setCategory(splashScreen.getCategory());
-		System.out.println(getCategory());
 		WinScreen screen = new WinScreen(playerName, timer.getTime(), getCategory().toLowerCase()); //"automorewdfbiles" );
 		
 		screen.setVisible(true);
+	}
+	
+	public void writeScore() {
+		String toWrite;
+		int time = timer.getElapsedTime();
+		String fileName = category + "Scores.txt";
+		
+		File file = new File("HighScores/" + fileName);
+		
+		if(!file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				System.out.println("Unable to create file");
+			}
+		}
+		
+		try {
+			FileOutputStream out = new FileOutputStream(file, true);
+			PrintStream print = new PrintStream(out);
+			print.println(playerName + "," + time);
+			print.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("File not found");
+		}
+		
 	}
 	
 	public boolean checkValidWord(String word){

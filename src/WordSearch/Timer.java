@@ -6,7 +6,7 @@ import java.util.TimerTask;
 
 
 public class Timer extends TimerTask {
-	private long elapsedTime;
+	private int elapsedTime;
 	private boolean running;
 	private static javax.swing.Timer ttimer;
 
@@ -43,6 +43,10 @@ public class Timer extends TimerTask {
 
 	public void resetTime() {
 		elapsedTime = 0;
+	}
+	
+	public int getElapsedTime() {
+		return elapsedTime;
 	}
 
 	public String getTime() {
