@@ -21,6 +21,10 @@ import javax.swing.JPanel;
 public class WordBank extends JPanel{
 	private Map<String, JCheckBox> wordBank;
 	
+	/**
+	 * Prints all words that have been placed in puzzle on left hand side.
+	 * Does not allow user to check check boxes.
+	 */
 	public WordBank(ArrayList<String> words) {
 		this.setLayout(new GridLayout(0, 2));
 		this.setSize(new Dimension(200, 600));
@@ -45,10 +49,16 @@ public class WordBank extends JPanel{
 		}
 	}
 	
+	/**
+	 * If selected word is in word bank updates.
+	 */
 	public boolean contains(String word) {
 		return wordBank.containsKey(word);
 	}
 	
+	/**
+	 * Checks the check box of the correct word guessed.
+	 */
 	public void checkBox(String guess){
 		JCheckBox box = wordBank.get(guess);
 		box.setSelected(true);
@@ -62,6 +72,10 @@ public class WordBank extends JPanel{
 		return new ArrayList<String>(wordBank.keySet());
 	}
 	
+	/**
+	 * Removes any words that could not be placed on the board
+	 * from the word bank.
+	 */
 	public void removeWord(String word) {
 		
 		remove(wordBank.get(word));

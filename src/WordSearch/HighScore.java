@@ -25,6 +25,10 @@ public class HighScore extends JDialog {
 		
 	}
 	
+	/**
+	 * Constructor takes a category that was played and then updates
+	 * the corresponding highscore card with that players time and name information.
+	 */
 	public HighScore(String category) {
 		setSize(600, 400);
 		addWindowListener(new WindowAdapter() {
@@ -46,7 +50,9 @@ public class HighScore extends JDialog {
 		
 	}
 	
-	//read in scores from file
+	/**
+	 * Reads in scores from file.
+	 */
 	public void getScores(String fileName) {
 		ArrayList<String> scoreList = FileUtilities.getListOfLinesFromFile("HighScores", fileName);
 		String name;
@@ -62,7 +68,10 @@ public class HighScore extends JDialog {
 			}
 		}		
 	
-	//find top five scores and add to panel
+
+	/**
+	 * Sorts scores and then picks the top 5 fastest scores to print.
+	 */
 	public void sortScores() {
 		JPanel scorePanel = new JPanel();
 		JPanel namePanel = new JPanel();

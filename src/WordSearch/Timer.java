@@ -10,6 +10,9 @@ public class Timer extends TimerTask {
 	private boolean running;
 	private static javax.swing.Timer ttimer;
 
+	/**
+	 * Constructor that sets timer to zero and running to false.
+	 */
 	public Timer() {
 		elapsedTime = 0;
 		running = false;
@@ -27,20 +30,32 @@ public class Timer extends TimerTask {
 		
 	}
 	
+	/**
+	 * starts timer from stop.
+	 */
 	public void startTime() {
 		running = true;
 		ttimer.start();
 	}
 	
+	/**
+	 * stops timer from running.
+	 */
 	public void stopTime() {
 		running = false;
 		ttimer.stop();
 	}
 
+	/**
+	 * stops timer until unpaused
+	 */
 	public void pauseTime() {
 		running = !running;
 	}
 
+	/**
+	 * sets time elapsed to zero
+	 */
 	public void resetTime() {
 		elapsedTime = 0;
 	}
@@ -64,6 +79,9 @@ public class Timer extends TimerTask {
 		return running;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.util.TimerTask#run()
+	 */
 	@Override
 	public void run() {
 		if (running) {

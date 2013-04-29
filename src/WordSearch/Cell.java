@@ -19,19 +19,28 @@ public class Cell {
 		// TODO create constructor. should there be an additional, parameterized constructor?
 	}
 	
+/**
+* Constructor takes a row and column and makes the cell class row and column.
+ */
 	public Cell(int row, int column) {
 		this.row = row;
 		this.column = column;
 		letter = ' ';
 	}
 
-
+	/**
+	* Constructor takes a row, column, and letter and makes the cell class row, column, and letter.
+	*/
 	public Cell(int row, int column, char letter) {
 		this.row = row;
 		this.column = column;
 		this.letter = letter;
 	}
 	
+	/**
+	* This draws the squares on the board and if selected
+	* updates the color to a highlighted color.
+	*/	
 	public void draw(Graphics g){		
 		//if highlighted, fill rectangle with yellow
 		if(highlighted) {

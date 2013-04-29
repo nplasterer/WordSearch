@@ -39,6 +39,9 @@ public class Game extends JFrame{
 	private JMenuItem play, exit, newGame, highScores;
 	private JLabel timeDisplay;
 	
+	/**
+	 * Constructor creates the menu bar, sets the timers, and calls the splashscreen.
+	 */
 	public Game() {
 		currentGame = this;
 		//initialize frame
@@ -78,9 +81,7 @@ public class Game extends JFrame{
 		
 		
 	}
-	
 
-	
 	private class fileListener implements ActionListener {
 
 		@Override
@@ -114,6 +115,9 @@ public class Game extends JFrame{
 	}
 	
 	
+	/**
+	 * Takes a file name and then imports the files words into the system.
+	 */
 	public void loadConfigFile(String file){
 		playerName = splashScreen.getPlayerName();
 		ArrayList<String> words = FileUtilities.getListOfLinesFromFile("SecretFiles", file);
@@ -141,10 +145,16 @@ public class Game extends JFrame{
 	}
 	
 	
+	/**
+	 * Checks to see if the game has anymore words to find.
+	 */
 	public boolean checkIfDone(){
 		return (wordsLeft == 0) ? true : false;
 	}
 	
+	/**
+	 * If no words are left to find shows win screen and stops timer.
+	 */
 	public void showWinScreen(){
 		timer.stopTime();
 		writeScore();
@@ -154,6 +164,9 @@ public class Game extends JFrame{
 		screen.setVisible(true);
 	}
 	
+	/**
+	 * Writes the score from the game to the correct file for the category played.
+	 */
 	public void writeScore() {
 		String toWrite;
 		int time = timer.getElapsedTime();
@@ -181,6 +194,9 @@ public class Game extends JFrame{
 		
 	}
 	
+	/**
+	 * Takes a word and checks to see if the word is in the wordbank.
+	 */
 	public boolean checkValidWord(String word){
 		String toCheck = "";
 		for(int i = 0; i < word.length(); i++) {
@@ -192,6 +208,10 @@ public class Game extends JFrame{
 		return wordBank.contains(toCheck);
 	}
 	
+	/**
+	 *Takes a start and end point and checks to see if the selection is
+	 *either diagonal, horizontal, or vertical. If none does not flag true.
+	 */
 	public boolean checkValidSelection(Point start, Point end){
 		// checks rows, cols, \ diagonal, / diagonal
 		boolean flag = false;
@@ -210,6 +230,9 @@ public class Game extends JFrame{
 		return flag;
 	}
 	
+	/**
+	 * Takes a start and end point and then highlights the corresponding spaces in between.
+	 */
 	public void highlightWords(Point start, Point end) {
         // vertical word downwards
         if (start.x == end.x && start.y < end.y) {
@@ -300,6 +323,9 @@ public class Game extends JFrame{
 
 	}
 	
+	/**
+	 * Run words to make sure the word is correct forwards and backwords.
+	 */
 	public void runWord() {
 		Point start = board.getMousePress();
 		Point end = board.getMouseRelease();

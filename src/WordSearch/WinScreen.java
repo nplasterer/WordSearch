@@ -22,6 +22,11 @@ public class WinScreen extends JDialog implements ActionListener {
 	private String playerName, time;
 	private JButton closeMe;
 	
+	/**
+	 * Constructor that takes a name, time, and category and then prints
+	 * the players name with the associated score and category on the screen.
+	 * Inserts a winning picture.
+	 */
 	public WinScreen(String playerName, String time, String category) {
 		setSize(400,400);
 		setTitle("Congratulations!");

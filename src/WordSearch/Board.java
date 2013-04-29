@@ -23,6 +23,11 @@ public class Board extends JPanel {
 		
 	}
 	
+/**
+ * Constructor takes a row, column, and array of words.
+ * Then creates cells and generates the puzzle with the list of words.
+ */
+
 	public Board(int rows, int columns, ArrayList<String> words) {
 		this.rows = rows;
 		this.columns = columns;
@@ -37,6 +42,11 @@ public class Board extends JPanel {
 		generatePuzzle(words);
 	}
 	
+/**
+* Takes a list of words and then arranges the words
+* in a random order on the board filling in extra spaces
+* with random letters.
+*/
 	public void generatePuzzle(ArrayList<String> words){
 		// TODO should fill in remaining cells with random chars after all words have been added
 		//sort words by descending length
@@ -56,7 +66,7 @@ public class Board extends JPanel {
 		for(String s : wordsInOrder)
 			insertWord(s, 0);
 		
-		/*Random random = new Random();
+		Random random = new Random();
 		String alphabet = "abcdefghijklmnopqrstuvwxyz";
 		char letter = ' ';
 		for(int i = 0; i < rows; i++) {
@@ -66,9 +76,14 @@ public class Board extends JPanel {
 					getCellAt(i,j).setLetter(letter);
 				}
 			}
-		}*/
+		}
 	}
 	
+	/**
+	 * Takes a start point and a end point and a place that the word wants to be placed
+	 * it then checks to make sure that it does not intersect incorrectly another word
+	 * and that the word does not intersect any edges of the board.
+	 */
 	public boolean checkValidLocation(Point start, Point end, String toPlace){
 		 // vertical word
         if (start.x == end.x) {
@@ -103,6 +118,10 @@ public class Board extends JPanel {
         return true;
 	}
 	
+	/**
+	 * Takes a word and a number of times that the word has tried to be placed on the board.
+	 * Inserts the word on the board if it hasn't tried to be placed on the board more than 400 times.
+	 */
 	public void insertWord(String word, int timesTried) {
 		if(timesTried < 400) {
 			Random rand = new Random();
@@ -181,6 +200,11 @@ public class Board extends JPanel {
 		}
 	}
 	
+/**
+* (non-Javadoc)
+* @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+* This refreshes board after words are found.
+*/
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
@@ -197,6 +221,9 @@ public class Board extends JPanel {
 		}
 	}
 
+	/**
+	 * This listens for a click on the board to highlight a word from click to release point.
+	 */
 	public void listen() {
 		this.addMouseListener(new MouseListener() {
 
@@ -230,6 +257,12 @@ public class Board extends JPanel {
 		});
 	}
 
+	/**
+	 * This takes a start point and a end point and then checks to see if the
+	 * word is in a diagonal, horizontal, or vertical position.
+	 * It also checks for words spelled forwards or backwards and will not allow
+	 * points that are not in one of the above formations.
+	 */
 	public String getWordAt(Point start, Point end) {
 		String word = "";
         // vertical word downwards

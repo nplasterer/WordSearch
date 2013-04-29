@@ -25,6 +25,10 @@ public class SplashScreen extends JDialog {
 	private JButton okButton;
 	private JLabel nameLabel, categoryLabel;
 	
+	/**
+	 * Default constructor creates a default splash screen with categories
+	 * and name field.
+	 */
 	public SplashScreen() {
 		// TODO This should be fleshed out better as a default case
 		playerName = new JTextField();
@@ -50,6 +54,11 @@ public class SplashScreen extends JDialog {
 		add(okButton, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Constructor that takes a list of words and creates a field
+	 * for categories with them. This also creates a listener that will not continue unless
+	 * a players name has been entered.
+	 */
 	public SplashScreen(ArrayList<String> words) {
 		//instantiate variables
 		playerName = new JTextField();
